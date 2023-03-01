@@ -2,7 +2,8 @@ import { todoListModule } from "./toDoListObject";
 import { todo } from "./toDoObject";
 import { project } from "./projectObject";
 export { myProjects } from "./myProjectsObject";
-export { globalProjectCounter, globalTodoCounter, setupInitalProjects};
+export { globalProjectCounter, globalTodoCounter };
+export { setupInitalProjects };
 
 let globalProjectCounter = 0;
 let globalTodoCounter = 0;
@@ -31,7 +32,7 @@ function setupInitalProjects() {
     ];
 
 
-    setupDefaultProject(todos);
+    const defaultProject = setupDefaultProject(todos);
 
     const todosSet1 = todos.slice(0, 6);
     const todosSet2 = todos.slice(6, 11);
@@ -40,6 +41,8 @@ function setupInitalProjects() {
     setupInitialProject("Website Redesign Project", todosSet1);
     setupInitialProject("Server Optimization Project", todosSet2);
     setupInitialProject("Product Development Project", todosSet3);
+
+    return defaultProject;
     
 };
 

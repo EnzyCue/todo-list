@@ -130,11 +130,11 @@ function addSettingsOption(container) {
     settingsOption.classList.add('settings-option');
 
     const settingsIcon = document.createElement('img');
-    settingsIcon.classList.add('settings-icon');
+    settingsIcon.classList.add('settingsIcon');
     settingsIcon.src = settingsSVG;
 
     const settingsLabel = document.createElement('span');
-    settingsLabel.classList.add('settings-label');
+    settingsLabel.classList.add('settingsLabel');
     settingsLabel.textContent = 'Settings';
 
     settingsOption.appendChild(settingsIcon);
