@@ -25,7 +25,7 @@ const myProjects = (() => {
   };
 
   const getProjectById = (id) => {
-    return projectList.find(project => project.getId() === id);
+    return getProjectList().find(project => project.getId() === id);
   };
 
   return {

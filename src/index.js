@@ -1,6 +1,5 @@
 import { generateSidebar } from "./GenerateDOM/sidebar";
 import { setupInitalProjects } from "./appLogic/initialSetup";
-// import { defaultProject } from "./appLogic/initialSetup";
 import { myProjects } from "./appLogic/initialSetup";
 import { generateMainContent } from "./GenerateDOM/mainContent";
 
@@ -19,10 +18,10 @@ projectItemButtonGroup.forEach(projectItemButton => {
 
         removeCurrentPage();
 
-        const projectID = projectItemButton.dataset.id;
-        const project = myProjects.getProjectById(projectID);
-        generateMainContent(project);
+        const projectID = parseInt(projectItemButton.dataset.id);
+        const projectSelected = myProjects.getProjectById(projectID);
 
+        generateMainContent(projectSelected);
     });
 });
 
@@ -43,7 +42,7 @@ projectItemButtonGroup.forEach(projectItemButton => {
 
 
 function removeCurrentPage(){
-    const html = document.querySelector('.container');
+    const html = document.querySelectorAll('.container > :not(.leftPanel)');
     html.forEach((child) => {
         child.parentNode.removeChild(child);
     });

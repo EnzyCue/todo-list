@@ -60,6 +60,11 @@ function setupExampleProject(title, todoSet){
 
     myProjects.addProject(theProject);
 
+    // console.log("Project Details:");
+    // console.log("Title: ", theProject.getTitle());
+    // console.log("Id: ", theProject.getId());
+    // console.log("Todo List: ", theProject.getTodoList());
+
 };
 
 
@@ -67,8 +72,6 @@ function setupDefaultProject(todoSet){
 
     const defaultList = todoListModule();
     defaultList.setTodos(todoSet);
-
-    console.log(defaultList.getTodos());
 
     const defaultProject = project("My To Dos", globalProjectCounter++);
 
@@ -84,3 +87,4 @@ function setupDefaultProject(todoSet){
 // function removeTodofromProject(todo, project){
 //     project.getTodoList().removeTodo(todo);
 // };
+

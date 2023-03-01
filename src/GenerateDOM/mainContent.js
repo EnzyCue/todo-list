@@ -36,7 +36,6 @@ function generateMainContent(project){
     
     html.appendChild(mainContent);
 
-    console.log(project.getTodoList().getTodos());
 };
 
 
@@ -54,7 +53,6 @@ function generateTodoPanel(container, todoList){
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
-    console.log({todoList});
 
     todoList.getTodos().forEach(todoItem => {
         generateTodo(todoPanel, todoItem);
