@@ -1,8 +1,8 @@
 import { todoListModule } from "./toDoListObject";
 import { todo } from "./toDoObject";
 import { project } from "./projectObject";
-import { myProjects } from "./myProjectsObject";
-export {globalProjectCounter, globalTodoCounter, setupInitalProjects};
+export { myProjects } from "./myProjectsObject";
+export { globalProjectCounter, globalTodoCounter, setupInitalProjects};
 
 let globalProjectCounter = 0;
 let globalTodoCounter = 0;
@@ -50,8 +50,7 @@ function setupInitialProject(title, todoSet){
     const todoList = todoListModule();
     todoList.setTodos = todoSet;
 
-    const project = project(title, globalCounter);
-    globalCounter++;
+    const project = project(title, globalCounter++);
     project.setTodoList(todoList);
 
     myProjects.push(project);
@@ -72,8 +71,7 @@ function setupDefaultProject(todoSet){
     const defaultList = todoListModule();
     defaultList.setTodos = todoSet;
 
-    const defaultProject = project("My To Dos", globalCounter);
-    globalCounter++;
+    const defaultProject = project("My To Dos", globalCounter++);
 
     defaultProject.setTodoList(todos);
 };
