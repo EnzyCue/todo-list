@@ -9,11 +9,11 @@ const html = document.querySelector('.container');
 function addProject(project) {
     const projectList = document.querySelector('.projectList');
 
-    const projectItem = document.createElement('li');
-    projectItem.textContent = project.getTitle();;
-    projectItem.dataset.id = project.getId();
+    const projectItemButton = document.createElement('projectItemButton');
+    projectItemButton.textContent = project.getTitle();;
+    projectItemButton.dataset.id = project.getId();
   
-    projectList.appendChild(projectItem);
+    projectList.appendChild(projectItemButton);
 };
 
 function removeProject(project) {
@@ -109,20 +109,21 @@ function addProjectPanelButton(container){
 
 
 function addProjectList(container) {
-    const projectList = document.createElement('ul');
+    const projectList = document.createElement('div');
     projectList.classList.add('projectList');
-  
-    // Add each project to the list
+
     myProjects.forEach(project => {
-      const projectItem = document.createElement('li');
-      projectItem.textContent = project.getTitle();
-      projectItem.dataset.id = project.getId();
+      const projectItemButton = document.createElement('button');
+      projectItemButton.classList.add('projectItemButton');
+      projectItemButton.textContent = project.getTitle();
+      projectItemButton.dataset.id = project.getId();
     
-      projectList.appendChild(projectItem);
+      projectList.appendChild(projectItemButton);
     });
   
     container.appendChild(projectList);
 };
+
 
 
 function addSettingsOption(container) {
