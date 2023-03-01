@@ -1,7 +1,8 @@
 import { todoListModule } from "./toDoListObject";
 import { todo } from "./toDoObject";
 import { project } from "./projectObject";
-export { myProjects } from "./myProjectsObject";
+import { myProjects } from "./myProjectsObject";
+export { myProjects };
 export { globalProjectCounter, globalTodoCounter };
 export { setupInitalProjects };
 
@@ -11,7 +12,7 @@ let globalTodoCounter = 0;
 
 function setupInitalProjects() {
 
-    const todos = [
+    const exampleTodos = [
         todo("Update website design", "Revamp the website layout and make it more user-friendly", "2023-04-01", "high", false, ++globalTodoCounter),
         todo("Optimize server performance", "Analyze server logs and optimize server settings to improve performance", "2023-04-02", "medium", false, ++globalTodoCounter),
         todo("Implement new feature", "Add a new feature to the website that allows users to save their preferences", "2023-04-03", "high", false, ++globalTodoCounter),
@@ -32,15 +33,16 @@ function setupInitalProjects() {
     ];
 
 
-    const defaultProject = setupDefaultProject(todos);
-
-    const todosSet1 = todos.slice(0, 6);
-    const todosSet2 = todos.slice(6, 11);
-    const todosSet3 = todos.slice(11);
+    const todosSet1 = exampleTodos.slice(0, 6);
+    const todosSet2 = exampleTodos.slice(6, 11);
+    const todosSet3 = exampleTodos.slice(11);
   
-    setupInitialProject("Website Redesign Project", todosSet1);
-    setupInitialProject("Server Optimization Project", todosSet2);
-    setupInitialProject("Product Development Project", todosSet3);
+    setupExampleProject("Website Redesign Project", todosSet1);
+    setupExampleProject("Server Optimization Project", todosSet2);
+    setupExampleProject("Product Development Project", todosSet3);
+
+
+    const defaultProject = setupDefaultProject(exampleTodos);
 
     return defaultProject;
     
@@ -48,16 +50,31 @@ function setupInitalProjects() {
 
 
 
-function setupInitialProject(title, todoSet){
+function setupExampleProject(title, todoSet){
 
     const todoList = todoListModule();
-    todoList.setTodos = todoSet;
+    todoList.setTodos(todoSet);
 
-    const project = project(title, globalCounter++);
-    project.setTodoList(todoList);
+    const theProject = project(title, globalProjectCounter++);
+    theProject.setTodoList(todoList);
 
-    myProjects.push(project);
+    myProjects.addProject(theProject);
 
+};
+
+
+function setupDefaultProject(todoSet){
+
+    const defaultList = todoListModule();
+    defaultList.setTodos(todoSet);
+
+    console.log(defaultList.getTodos());
+
+    const defaultProject = project("My To Dos", globalProjectCounter++);
+
+    defaultProject.setTodoList(defaultList);
+
+    return defaultProject;
 };
 
 // function addTodoToProject(todo, project){
@@ -67,14 +84,3 @@ function setupInitialProject(title, todoSet){
 // function removeTodofromProject(todo, project){
 //     project.getTodoList().removeTodo(todo);
 // };
-
-
-function setupDefaultProject(todoSet){
-
-    const defaultList = todoListModule();
-    defaultList.setTodos = todoSet;
-
-    const defaultProject = project("My To Dos", globalCounter++);
-
-    defaultProject.setTodoList(todos);
-};

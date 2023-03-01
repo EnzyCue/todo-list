@@ -1,6 +1,6 @@
-import { myProjects } from '../appLogic/myProjectsObject';
-import profileSVG from '../svg/profile.svg';
-import settingsSVG from '../svg/settings.svg';
+import { myProjects } from '../appLogic/initialSetup';
+import profileSVG from '../svg/user.png';
+import settingsSVG from '../svg/settings.png';
 export {generateSidebar, addProject, removeProject};
 
 const html = document.querySelector('.container');
@@ -55,7 +55,7 @@ function addWelcomeImage(container){
     welcomeImage.classList.add('welcomeImage');
 
 
-    container.appendChild(welcome);
+    container.appendChild(welcomeImage);
 
 };
 
@@ -112,7 +112,7 @@ function addProjectList(container) {
     const projectList = document.createElement('div');
     projectList.classList.add('projectList');
 
-    myProjects.forEach(project => {
+    myProjects.getProjectList().forEach(project => {
       const projectItemButton = document.createElement('button');
       projectItemButton.classList.add('projectItemButton');
       projectItemButton.textContent = project.getTitle();

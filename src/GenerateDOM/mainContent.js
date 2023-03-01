@@ -1,15 +1,17 @@
-import prioritySVGHigh from '../svg/prioritySVGHigh.svg';
-import prioritySVGMedium from '../svg/prioritySVGMedium.svg';
-import prioritySVGLow from '../svg/prioritySVGLow.svg';
+import prioritySVGHigh from '../svg/prioritySVGHigh.png';
+import prioritySVGMedium from '../svg/prioritySVGMedium.png';
+import prioritySVGLow from '../svg/prioritySVGLow.png';
 
-import progressIconComplete from '../svg/progressIconComplete.svg';
-import progressIconUnfinished from '../svg/progressIconUnfinished.svg';
+import progressIconComplete from '../svg/progressIconComplete.png';
+import progressIconUnfinished from '../svg/progressIconUnfinished.png';
+
+import { project } from '../appLogic/projectObject';
 
 export {generateMainContent};
 
 const html = document.querySelector('.container');
 
-function addTodoButton(container, project){
+function addTodoButton(container){
 
     const todoButton = document.createElement('button'); 
 
@@ -18,7 +20,7 @@ function addTodoButton(container, project){
     todoButton.textContent = 'Add New To-Do Item';
 
 
-    container.appendChild(mainContent);
+    container.appendChild(todoButton);
 
 };
 
@@ -30,9 +32,11 @@ function generateMainContent(project){
 
     generateTodoPanel(mainContent, project.getTodoList());
 
-    addTodoButton(mainContent, project);
+    addTodoButton(mainContent);
     
     html.appendChild(mainContent);
+
+    console.log(project.getTodoList().getTodos());
 };
 
 
@@ -50,11 +54,23 @@ function generateTodoPanel(container, todoList){
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
-    todoList.array.forEach(todoItem => {
-        generateTodoItem(todoPanel, todoItem);
+    console.log({todoList});
+
+    todoList.getTodos().forEach(todoItem => {
+        generateTodo(todoPanel, todoItem);
     });
 
     container.appendChild(todoPanel);
+};
+
+function generateTodo(container, todo){
+    const todoContainer = document.createElement('div');
+    todoContainer.classList.add('todoContainer');
+
+    generateTodoItem(todoContainer, todo);
+    generateTodoIsCompleteButton(todoContainer, todo.getIsComplete());
+
+    container.appendChild(todoContainer);
 };
 
 function generateTodoItem(container, todo){
@@ -63,17 +79,10 @@ function generateTodoItem(container, todo){
     
     generatePrioritySvg(todoButton, todo.getPriority());
     generateTodoTitle(todoButton, todo.getTitle());
-    generateTodoDate(todoButton, todo.getDate());
-
-    const todoButtonWrapper = document.createElement('div');
-    todoButtonWrapper.classList.add('todoButtonWrapper');
-
-    generateTodoIsCompleteButton(todoButtonWrapper, todo.isComplete());
-    todoButton.appendChild(todoButtonWrapper);
-
+    generateTodoDate(todoButton, todo.getDueDate());
+    
     container.appendChild(todoButton);
 };
-
 
 
 function generateTodoIsCompleteButton(container, isComplete){
@@ -100,7 +109,7 @@ function generateTodoIsCompleteButton(container, isComplete){
 
 
 function generateTodoDate(container, date){
-    const todoDate= document.createElement('span');
+    const todoDate = document.createElement('span');
     todoDate.classList.add('todoDate');
 
     todoDate.textContent = date;
