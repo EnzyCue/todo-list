@@ -1,11 +1,30 @@
 import { myProjects } from '../appLogic/myProjectsObject';
 import profileSVG from '../svg/profile.svg';
 import settingsSVG from '../svg/settings.svg';
+export {generateSidebar, addProject, removeProject};
 
 const html = document.querySelector('.container');
 
 
-function generateSidebarl(){
+function addProject(project) {
+    const projectList = document.querySelector('.projectList');
+
+    const projectItem = document.createElement('li');
+    projectItem.textContent = project.getTitle();;
+    projectItem.dataset.id = project.getId();
+  
+    projectList.appendChild(projectItem);
+};
+
+function removeProject(project) {
+    const projectList = document.querySelector('.projectList');
+    const projectItem = projectList.querySelector(`li[data-id="${project.getId()}"]`);
+  
+    projectList.removeChild(projectItem);
+};
+
+
+function generateSidebar(){
     const leftPanel = document.createElement('div');
     leftPanel.classList.add('leftPanel');
 
@@ -97,12 +116,14 @@ function addProjectList(container) {
     myProjects.forEach(project => {
       const projectItem = document.createElement('li');
       projectItem.textContent = project.getTitle();
-  
+      projectItem.dataset.id = project.getId();
+    
       projectList.appendChild(projectItem);
     });
   
     container.appendChild(projectList);
 };
+
 
 function addSettingsOption(container) {
     const settingsOption = document.createElement('div');

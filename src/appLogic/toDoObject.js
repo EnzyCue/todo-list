@@ -1,32 +1,36 @@
-export {toDo};
+export {todo};
 
-const toDo = (title, description, dueDate, priority, isComplete) => {
-    const getTitle = () => title;
-    const setTitle = (newTitle) => title = newTitle;
+const todo = (title, description, dueDate, priority, isComplete, id) => {
+  const getId = () => id;
   
-    const getDescription = () => description;
-    const setDescription = (newDescription) => description = newDescription;
+  const getTitle = () => title;
+  const setTitle = (newTitle) => title = newTitle;
   
-    const getDueDate = () => dueDate;
-    const setDueDate = (newDueDate) => dueDate = newDueDate;
+  const getDescription = () => description;
+  const setDescription = (newDescription) => description = newDescription;
   
-    const getPriority = () => priority;
-    const setPriority = (newPriority) => priority = newPriority;
+  const getDueDate = () => dueDate;
+  const setDueDate = (newDueDate) => dueDate = newDueDate;
   
-    const getIsComplete = () => isComplete;
-    const setIsComplete = (newIsComplete) => isComplete = newIsComplete;
+  const getPriority = () => priority;
+  const setPriority = (newPriority) => priority = newPriority;
   
-    return {
-      getTitle,
-      setTitle,
-      getDescription,
-      setDescription,
-      getDueDate,
-      setDueDate,
-      getPriority,
-      setPriority,
-      getIsComplete,
-      setIsComplete
-    };
-  }
+  const getIsComplete = () => isComplete;
+  const setIsComplete = (newIsComplete) => isComplete = newIsComplete;
+  
+  return {
+    getId,
+    getTitle,
+    setTitle,
+    getDescription,
+    setDescription,
+    getDueDate,
+    setDueDate,
+    getPriority,
+    setPriority,
+    getIsComplete,
+    setIsComplete
+  };
+};
+
   

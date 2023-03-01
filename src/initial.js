@@ -1,4 +1,4 @@
-
+import { generateSidebar } from "./GenerateDOM/sidebar";
 
 // make the original side bar with...
 // placeholder name/id
