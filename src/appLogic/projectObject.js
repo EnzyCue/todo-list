@@ -10,11 +10,14 @@ const project = (title) => {
       todoList.push(todo);
     }
   
-    const removeTodo = (index) => {
-      todoList.splice(index, 1);
-    }
+    const removeTodo = (todo) => {
+        const index = todoList.indexOf(todo);
+        if (index !== -1) {
+          todoList.splice(index, 1);
+        }
+      }
   
-    const getTodos = () => {
+    const getTodoList = () => {
       return todoList;
     }
   
@@ -22,7 +25,7 @@ const project = (title) => {
       todoList = newTodoList;
     }
   
-    return { getTitle, setTitle, addTodo, removeTodo, getTodos, setTodoList };
+    return { getTitle, setTitle, addTodo, removeTodo, getTodoList, setTodoList };
   };
   
 
