@@ -43,7 +43,9 @@ defaultProjectButton.addEventListener('click', () => {
 const completeButton = document.querySelector('.completeButton');
 
 completeButton.addEventListener('click', () => {
-    
+    const todoID = parseInt(completeButton.dataset.id);
+    const projectSelected = myProjects.getProjectById(todoID);
+    // need to implement a method for adding getting a todo through its id :(.
 
 });
 

@@ -24,4 +24,4 @@ const todoListModule = () => {
     }
   
     return { addTodo, removeTodo, getTodos, setTodos };
-  };
+};

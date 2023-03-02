@@ -66,7 +66,7 @@ function generateTodo(container, todo){
     todoContainer.classList.add('todoContainer');
 
     generateTodoItem(todoContainer, todo);
-    generateTodoIsCompleteButton(todoContainer, todo.getIsComplete());
+    generateTodoIsCompleteButton(todoContainer, todo);
 
     container.appendChild(todoContainer);
 };
@@ -74,6 +74,8 @@ function generateTodo(container, todo){
 function generateTodoItem(container, todo){
     const todoButton = document.createElement('button');
     todoButton.classList.add('todoItem');
+
+    todoButton.dataset.id = todo.getId();
     
     generatePrioritySvg(todoButton, todo.getPriority());
     generateTodoTitle(todoButton, todo.getTitle());
@@ -83,15 +85,16 @@ function generateTodoItem(container, todo){
 };
 
 
-function generateTodoIsCompleteButton(container, isComplete){
+function generateTodoIsCompleteButton(container, todo){
 
     const completeButton = document.createElement('button'); 
     completeButton.classList.add('completeButton');
+    completeButton.dataset.id = todo.getId();
 
     const completeIcon = document.createElement('img');
     completeIcon.classList.add('completeIcon');
 
-    switch(isComplete){
+    switch(todo.getIsComplete()){
         case true:
             completeIcon.src = progressIconComplete;
             break;
