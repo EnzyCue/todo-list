@@ -1,6 +1,4 @@
-import prioritySVGHigh from '../svg/prioritySVGHigh.png';
-import prioritySVGMedium from '../svg/prioritySVGMedium.png';
-import prioritySVGLow from '../svg/prioritySVGLow.png';
+import prioritySVG from '../svg/prioritySVGHigh.png';
 
 import progressIconComplete from '../svg/progressIconComplete.png';
 import progressIconUnfinished from '../svg/progressIconUnfinished.png';
@@ -17,7 +15,7 @@ function addTodoButton(container){
 
     todoButton.classList.add('todoButton');
 
-    todoButton.textContent = 'Add New To-Do Item';
+    todoButton.textContent = 'Add new item to the list';
 
 
     container.appendChild(todoButton);
@@ -30,9 +28,11 @@ function generateMainContent(project){
 
     generateHeading(mainContent, project.getTitle());
 
+    addTodoButton(mainContent);
+
     generateTodoPanel(mainContent, project.getTodoList());
 
-    addTodoButton(mainContent);
+    
     
     html.appendChild(mainContent);
 
@@ -128,15 +128,15 @@ function generateTodoTitle(container, title){
 function generatePrioritySvg(container, priority) {
     switch (priority) {
       case 'high':
-        generateSvg(container, prioritySVGHigh, 3);
+        generateSvg(container, prioritySVG, 3);
         break;
   
       case 'medium':
-        generateSvg(container, prioritySVGHigh, 2);
+        generateSvg(container, prioritySVG, 2);
         break;
   
       case 'low':
-        generateSvg(container, prioritySVGHigh, 1);
+        generateSvg(container, prioritySVG, 1);
         break;
     };
   };

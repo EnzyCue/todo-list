@@ -26,6 +26,27 @@ projectItemButtonGroup.forEach(projectItemButton => {
     });
 });
 
+
+// event listener for loading default project from sidebar by clicking on it
+
+const defaultProjectButton = document.querySelector('.projectPanelHeaderButton');
+
+defaultProjectButton.addEventListener('click', () => {
+
+    removeCurrentPage();
+
+    generateMainContent(defaultProject);
+});
+
+// event listener for clicking the check mark
+
+const completeButton = document.querySelector('.completeButton');
+
+completeButton.addEventListener('click', () => {
+    
+
+});
+
 // event listener for adding a project from sidebar
 
 

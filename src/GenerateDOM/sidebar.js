@@ -1,6 +1,8 @@
 import { myProjects } from '../appLogic/initialSetup';
 import profileSVG from '../svg/user.png';
 import settingsSVG from '../svg/settings.png';
+import projectPlusSVG from '../svg/plus.png';
+import projectHeaderSVG from '../svg/layers.png';
 export {generateSidebar, addProject, removeProject};
 
 const html = document.querySelector('.container');
@@ -67,7 +69,7 @@ function addWelcomeMessage(container){
     const welcomeMessage = document.createElement('div');
     welcomeMessage.classList.add('welcomeMessage');
 
-    welcomeMessage.textContent = 'Welcome';
+    welcomeMessage.textContent = 'Welcome, ';
     welcomePackage.appendChild(welcomeMessage);
     addWelcomeName(welcomePackage);
 
@@ -98,18 +100,45 @@ function generateProjectPanel(container){
 };
 
 function addProjectPanelHeader(container){
-    const projectPanelHeader = document.createElement('span');
-    projectPanelHeader.classList.add('projectPanelHeader');
-    projectPanelHeader.textContent = 'My Projects';
+
+    addProjectPanelSVG(container);
+
+    const projectPanelHeader = document.createElement('button');
+    projectPanelHeader.classList.add('projectPanelHeaderButton');
+    projectPanelHeader.textContent = 'Projects';
+
+    container.appendChild(projectPanelHeader);
 
     addProjectPanelButton(container);
 
-    container.appendChild(projectPanelHeader);
+    
 }
+
+function addProjectPanelSVG(container){
+    const projectPanelSVG = document.createElement('img');
+    projectPanelSVG.classList.add('projectPanelSVG');
+    projectPanelSVG.src = projectHeaderSVG;
+
+    container.appendChild(projectPanelSVG);
+
+};
+
+function addProjectPLusSVG(container){
+    const projectPlus = document.createElement('img');
+    projectPlus.classList.add('projectPlusSVG');
+    projectPlus.src = projectPlusSVG;
+
+    container.appendChild(projectPlus);
+
+};
+
+
 
 function addProjectPanelButton(container){
     const projectPanelButton = document.createElement('button');
     projectPanelButton.classList.add('projectPanelButton');
+
+    addProjectPLusSVG(projectPanelButton);
 
     container.appendChild(projectPanelButton);
 };
@@ -135,7 +164,7 @@ function addProjectList(container) {
 
 function addSettingsOption(container) {
     const settingsOption = document.createElement('div');
-    settingsOption.classList.add('settings-option');
+    settingsOption.classList.add('settingsOption');
 
     const settingsIcon = document.createElement('img');
     settingsIcon.classList.add('settingsIcon');
