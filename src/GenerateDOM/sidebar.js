@@ -61,19 +61,26 @@ function addWelcomeImage(container){
 
 function addWelcomeMessage(container){
 
+    const welcomePackage = document.createElement('div');
+    welcomePackage.classList.add('welcomePackage');
+
     const welcomeMessage = document.createElement('div');
     welcomeMessage.classList.add('welcomeMessage');
 
     welcomeMessage.textContent = 'Welcome';
+    welcomePackage.appendChild(welcomeMessage);
+    addWelcomeName(welcomePackage);
 
-    addWelcomeName(container);
-    container.appendChild(welcomeMessage);
+    container.appendChild(welcomePackage);
+
+    
+    
 };
 
 function addWelcomeName(container) {
     const welcomeName = document.createElement('span');
     welcomeName.classList.add('welcomeName');
-    welcomeName.textContent = 'John Doe';
+    welcomeName.textContent = 'Liu Fang';
 
     container.appendChild(welcomeName);
 };

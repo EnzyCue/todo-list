@@ -2,6 +2,7 @@ import { generateSidebar } from "./GenerateDOM/sidebar";
 import { setupInitalProjects } from "./appLogic/initialSetup";
 import { myProjects } from "./appLogic/initialSetup";
 import { generateMainContent } from "./GenerateDOM/mainContent";
+import './style.css';
 
 const defaultProject = setupInitalProjects();
 

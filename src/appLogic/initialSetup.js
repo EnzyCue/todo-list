@@ -60,11 +60,6 @@ function setupExampleProject(title, todoSet){
 
     myProjects.addProject(theProject);
 
-    // console.log("Project Details:");
-    // console.log("Title: ", theProject.getTitle());
-    // console.log("Id: ", theProject.getId());
-    // console.log("Todo List: ", theProject.getTodoList());
-
 };
 
 
