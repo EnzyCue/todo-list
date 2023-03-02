@@ -125,23 +125,32 @@ function generateTodoTitle(container, title){
 };
 
 
-function generatePrioritySvg(container, priority){
-
-    const priorityIcon = document.createElement('img');
-    priorityIcon.classList.add('priorityIcon');
-
-    switch(priority){
-        case 'high':
-            priorityIcon.src = prioritySVGHigh;
-            break;
-
-        case 'medium':
-            priorityIcon.src = prioritySVGMedium;
-            break;
-
-        case 'low':
-            priorityIcon.src = prioritySVGLow;
-            break;
+function generatePrioritySvg(container, priority) {
+    switch (priority) {
+      case 'high':
+        generateSvg(container, prioritySVGHigh, 3);
+        break;
+  
+      case 'medium':
+        generateSvg(container, prioritySVGHigh, 2);
+        break;
+  
+      case 'low':
+        generateSvg(container, prioritySVGHigh, 1);
+        break;
     };
-    container.appendChild(priorityIcon);
-};
+  };
+  
+  function generateSvg(container, svgSrc, count) {
+    const flexContainer = document.createElement('div');
+    flexContainer.classList.add('svgFlexContainer');
+  
+    for (let i = 0; i < count; i++) {
+      const svgIcon = document.createElement('img');
+      svgIcon.classList.add('priorityIcon');
+      svgIcon.src = svgSrc;
+      flexContainer.appendChild(svgIcon);
+    }
+  
+    container.appendChild(flexContainer);
+  };
