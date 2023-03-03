@@ -3,12 +3,12 @@ import profileSVG from '../svg/user.png';
 import settingsSVG from '../svg/settings.png';
 import projectPlusSVG from '../svg/plus.png';
 import projectHeaderSVG from '../svg/layers.png';
-export {generateSidebar, addProject, removeProject};
+export {generateSidebar, addProjectToSidebar, removeProjectFromSidebar};
 
 const html = document.querySelector('.container');
 
 
-function addProject(project) {
+function addProjectToSidebar(project) {
     const projectList = document.querySelector('.projectList');
 
     const projectItemButton = document.createElement('projectItemButton');
@@ -18,7 +18,7 @@ function addProject(project) {
     projectList.appendChild(projectItemButton);
 };
 
-function removeProject(project) {
+function removeProjectFromSidebar(project) {
     const projectList = document.querySelector('.projectList');
     const projectItem = projectList.querySelector(`li[data-id="${project.getId()}"]`);
   
@@ -43,50 +43,45 @@ function generateWelcomePanel(container){
     const welcome = document.createElement('div');
     welcome.classList.add('welcome');
 
+    function addWelcomeImage(container){
+
+        const welcomeImage = document.createElement('img');
+        welcomeImage.src = profileSVG;
+        welcomeImage.classList.add('welcomeImage');
+    
+        container.appendChild(welcomeImage);
+    
+    };
+    
+    function addWelcomeMessage(container){
+    
+        const welcomePackage = document.createElement('div');
+        welcomePackage.classList.add('welcomePackage');
+    
+        const welcomeMessage = document.createElement('div');
+        welcomeMessage.classList.add('welcomeMessage');
+    
+        welcomeMessage.textContent = 'Welcome, ';
+        welcomePackage.appendChild(welcomeMessage);
+        
+        function addWelcomeName(container) {
+            const welcomeName = document.createElement('span');
+            welcomeName.classList.add('welcomeName');
+            welcomeName.textContent = 'Liu Fang';
+        
+            container.appendChild(welcomeName);
+        };
+    
+        addWelcomeName(welcomePackage);
+        container.appendChild(welcomePackage);
+    };
+    
     addWelcomeImage(welcome);
     addWelcomeMessage(welcome);
-
     container.appendChild(welcome);
 };
 
 
-function addWelcomeImage(container){
-
-    const welcomeImage = document.createElement('img');
-    welcomeImage.src = profileSVG;
-    welcomeImage.classList.add('welcomeImage');
-
-
-    container.appendChild(welcomeImage);
-
-};
-
-function addWelcomeMessage(container){
-
-    const welcomePackage = document.createElement('div');
-    welcomePackage.classList.add('welcomePackage');
-
-    const welcomeMessage = document.createElement('div');
-    welcomeMessage.classList.add('welcomeMessage');
-
-    welcomeMessage.textContent = 'Welcome, ';
-    welcomePackage.appendChild(welcomeMessage);
-    addWelcomeName(welcomePackage);
-
-    container.appendChild(welcomePackage);
-
-    
-    
-};
-
-function addWelcomeName(container) {
-    const welcomeName = document.createElement('span');
-    welcomeName.classList.add('welcomeName');
-    welcomeName.textContent = 'Liu Fang';
-
-    container.appendChild(welcomeName);
-};
- 
 
 function generateProjectPanel(container){
     const projectPanel = document.createElement('div');
