@@ -79,14 +79,14 @@ body{
     align-items: center;
     cursor: pointer;
 }
-.leftPanel .projectPanel .projectPanelButton{
+.leftPanel .projectPanel .addProjectButton{
     border: none;
     background-color: black;
     border-radius: 10px;
     width: 35px;
     height: 35px;
 }
-.leftPanel .projectPanel .projectPanelButton img{
+.leftPanel .projectPanel .addProjectButton img{
     fill: black;
     width: 100%;
     height: 100%;

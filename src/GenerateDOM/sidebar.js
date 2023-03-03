@@ -3,28 +3,27 @@ import profileSVG from '../svg/user.png';
 import settingsSVG from '../svg/settings.png';
 import projectPlusSVG from '../svg/plus.png';
 import projectHeaderSVG from '../svg/layers.png';
-export {generateSidebar, addProjectToSidebar, removeProjectFromSidebar};
 
-const html = document.querySelector('.container');
+export {generateSidebar};
 
-
-function addProjectToSidebar(project) {
+export function addProjectToSidebar(project) {
     const projectList = document.querySelector('.projectList');
 
     const projectItemButton = document.createElement('projectItemButton');
-    projectItemButton.textContent = project.getTitle();;
+    projectItemButton.textContent = project.getTitle();
     projectItemButton.dataset.id = project.getId();
   
     projectList.appendChild(projectItemButton);
 };
 
-function removeProjectFromSidebar(project) {
+export function removeProjectFromSidebar(project) {
     const projectList = document.querySelector('.projectList');
     const projectItem = projectList.querySelector(`li[data-id="${project.getId()}"]`);
   
     projectList.removeChild(projectItem);
 };
 
+const html = document.querySelector('.container');
 
 function generateSidebar(){
     const leftPanel = document.createElement('div');
@@ -34,7 +33,7 @@ function generateSidebar(){
 
     generateProjectPanel(leftPanel);
 
-    addSettingsOption(leftPanel);
+    generateSettingsPanel(leftPanel);
     
     html.appendChild(leftPanel);
 };
@@ -42,45 +41,42 @@ function generateSidebar(){
 function generateWelcomePanel(container){
     const welcome = document.createElement('div');
     welcome.classList.add('welcome');
-
-    function addWelcomeImage(container){
-
-        const welcomeImage = document.createElement('img');
-        welcomeImage.src = profileSVG;
-        welcomeImage.classList.add('welcomeImage');
-    
-        container.appendChild(welcomeImage);
-    
+  
+    const addWelcomeImage = () => {
+      const welcomeImage = document.createElement('img');
+      welcomeImage.src = profileSVG;
+      welcomeImage.classList.add('welcomeImage');
+      return welcomeImage;
+    };
+  
+    const addWelcomePackage = () => {
+      const welcomePackage = document.createElement('div');
+      welcomePackage.classList.add('welcomePackage');
+      welcomePackage.appendChild(addWelcomeMessage());
+      welcomePackage.appendChild(addWelcomeName());
+      return welcomePackage;
     };
     
-    function addWelcomeMessage(container){
-    
-        const welcomePackage = document.createElement('div');
-        welcomePackage.classList.add('welcomePackage');
-    
-        const welcomeMessage = document.createElement('div');
-        welcomeMessage.classList.add('welcomeMessage');
-    
-        welcomeMessage.textContent = 'Welcome, ';
-        welcomePackage.appendChild(welcomeMessage);
-        
-        function addWelcomeName(container) {
-            const welcomeName = document.createElement('span');
-            welcomeName.classList.add('welcomeName');
-            welcomeName.textContent = 'Liu Fang';
-        
-            container.appendChild(welcomeName);
-        };
-    
-        addWelcomeName(welcomePackage);
-        container.appendChild(welcomePackage);
+    const addWelcomeMessage = () => {
+      const welcomeMessage = document.createElement('div');
+      welcomeMessage.classList.add('welcomeMessage');
+      welcomeMessage.textContent = 'Welcome, ';
+      return welcomeMessage;
+    };
+
+    const addWelcomeName = () => {
+        const welcomeName = document.createElement('span');
+        welcomeName.classList.add('welcomeName');
+        welcomeName.textContent = 'Liu Fang';
+        return welcomeName;
     };
     
-    addWelcomeImage(welcome);
-    addWelcomeMessage(welcome);
+    welcome.appendChild(addWelcomeImage());
+    welcome.appendChild(addWelcomePackage());
     container.appendChild(welcome);
 };
 
+  
 
 
 function generateProjectPanel(container){
@@ -91,73 +87,63 @@ function generateProjectPanel(container){
     addProjectList(projectPanel);
 
     container.appendChild(projectPanel);
-
 };
 
-function addProjectPanelHeader(container){
-
-    addProjectPanelSVG(container);
-
-    const projectPanelHeader = document.createElement('button');
-    projectPanelHeader.classList.add('projectPanelHeaderButton');
-    projectPanelHeader.textContent = 'Projects';
-
-    container.appendChild(projectPanelHeader);
-
-    addProjectPanelButton(container);
-
-    
-}
-
-function addProjectPanelSVG(container){
-    const projectPanelSVG = document.createElement('img');
-    projectPanelSVG.classList.add('projectPanelSVG');
-    projectPanelSVG.src = projectHeaderSVG;
-
-    container.appendChild(projectPanelSVG);
-
+function addProjectPanelHeader(container) {
+    const createProjectsButton = () => {
+      const projectsButton = document.createElement('button');
+      projectsButton.classList.add('projectPanelHeaderButton');
+      projectsButton.textContent = 'Projects';
+      return projectsButton;
+    };
+  
+    const createProjectsIcon = () => {
+      const projectsIcon = document.createElement('img');
+      projectsIcon.classList.add('projectPanelSVG');
+      projectsIcon.src = projectHeaderSVG;
+      return projectsIcon;
+    };
+  
+    const createAddProjectButton = () => {
+      const addProjectButton = document.createElement('button');
+      addProjectButton.classList.add('addProjectButton');
+      const addProjectIcon = document.createElement('img');
+      addProjectIcon.classList.add('projectPlusSVG');
+      addProjectIcon.src = projectPlusSVG;
+      addProjectButton.appendChild(addProjectIcon);
+      return addProjectButton;
+    };
+  
+    const projectsButton = createProjectsButton();
+    const projectsIcon = createProjectsIcon();
+    const addProjectButton = createAddProjectButton();
+  
+    container.append(projectsIcon, projectsButton, addProjectButton);
 };
-
-function addProjectPLusSVG(container){
-    const projectPlus = document.createElement('img');
-    projectPlus.classList.add('projectPlusSVG');
-    projectPlus.src = projectPlusSVG;
-
-    container.appendChild(projectPlus);
-
-};
-
-
-
-function addProjectPanelButton(container){
-    const projectPanelButton = document.createElement('button');
-    projectPanelButton.classList.add('projectPanelButton');
-
-    addProjectPLusSVG(projectPanelButton);
-
-    container.appendChild(projectPanelButton);
-};
-
-
-function addProjectList(container) {
+  
+function addProjectList(container){
     const projectList = document.createElement('div');
     projectList.classList.add('projectList');
-
+  
     myProjects.getProjectList().forEach(project => {
-      const projectItemButton = document.createElement('button');
-      projectItemButton.classList.add('projectItemButton');
-      projectItemButton.textContent = project.getTitle();
-      projectItemButton.dataset.id = project.getId();
-    
+      const projectItemButton = createProjectItemButton(project);
       projectList.appendChild(projectItemButton);
     });
+
+
+    function createProjectItemButton(project) {
+        const projectItemButton = document.createElement('button');
+        projectItemButton.classList.add('projectItemButton');
+        projectItemButton.textContent = project.getTitle();
+        projectItemButton.dataset.id = project.getId();
+        return projectItemButton;
+    };
   
     container.appendChild(projectList);
 };
 
 
-
-function addSettingsOption(container) {
+function generateSettingsPanel(container) {
     const settingsOption = document.createElement('div');
     settingsOption.classList.add('settingsOption');
 
