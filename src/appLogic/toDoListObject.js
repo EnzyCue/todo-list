@@ -22,6 +22,10 @@ const todoListModule = () => {
     const setTodos = (newTodos) => {
       todos = newTodos;
     }
+    
+    const getTodoById = (id) => {
+      return getTodos().find(todo => todo.getId() === id);
+    };
   
-    return { addTodo, removeTodo, getTodos, setTodos };
+    return { addTodo, removeTodo, getTodos, setTodos, getTodoById };
 };

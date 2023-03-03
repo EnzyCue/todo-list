@@ -2,6 +2,10 @@ import { generateSidebar } from "./GenerateDOM/sidebar";
 import { setupInitalProjects } from "./appLogic/initialSetup";
 import { myProjects } from "./appLogic/initialSetup";
 import { generateMainContent } from "./GenerateDOM/mainContent";
+
+import progressIconComplete from './svg/progressIconComplete.png';
+import progressIconUnfinished from './svg/progressIconUnfinished.png';
+
 import './style.css';
 
 const defaultProject = setupInitalProjects();
@@ -19,7 +23,7 @@ projectItemButtonGroup.forEach(projectItemButton => {
 
         removeCurrentPage();
 
-        const projectID = parseInt(projectItemButton.dataset.id);
+        const projectID = parseInt(projectItemButton.dataset.projectid);
         const projectSelected = myProjects.getProjectById(projectID);
 
         generateMainContent(projectSelected);
@@ -43,9 +47,19 @@ defaultProjectButton.addEventListener('click', () => {
 const completeButton = document.querySelector('.completeButton');
 
 completeButton.addEventListener('click', () => {
+    const projectID = parseInt(completeButton.dataset.projectid);
+    const projectSelected = myProjects.getProjectById(projectID);
+
     const todoID = parseInt(completeButton.dataset.id);
-    const projectSelected = myProjects.getProjectById(todoID);
-    // need to implement a method for adding getting a todo through its id :(.
+    console.log({projectID});
+    const todoSelected = (projectSelected.getTodoList()).getTodoById(todoID);
+
+    newComplete =  !todoSelected.getIsComplete();
+    todoSelected.setIsComplete(newComplete);
+    // defaul project is screwing up your id system!!!
+    // changeTodoCompleteness
+
+
 
 });
 
@@ -70,4 +84,20 @@ function removeCurrentPage(){
     html.forEach((child) => {
         child.parentNode.removeChild(child);
     });
+};
+
+function changeTodoCompleteness(newComplete){
+    // const completeButton = document.querySelector('.completeButton');
+
+    const completeIcon = document.querySelector('.completeIcon');
+
+    switch(newComplete){
+        case true:
+            completeIcon.src = progressIconComplete;
+            break;
+
+        case false:
+            completeIcon.src = progressIconUnfinished;
+            break;
+    };
 };

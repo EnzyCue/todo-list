@@ -11,14 +11,14 @@ export function addProjectToSidebar(project) {
 
     const projectItemButton = document.createElement('projectItemButton');
     projectItemButton.textContent = project.getTitle();
-    projectItemButton.dataset.id = project.getId();
+    projectItemButton.dataset.projectid = project.getId();
   
     projectList.appendChild(projectItemButton);
 };
 
 export function removeProjectFromSidebar(project) {
     const projectList = document.querySelector('.projectList');
-    const projectItem = projectList.querySelector(`li[data-id="${project.getId()}"]`);
+    const projectItem = projectList.querySelector(`li[data-projectid="${project.getId()}"]`);
   
     projectList.removeChild(projectItem);
 };
@@ -155,7 +155,7 @@ function addProjectList(container){
         const projectItemButton = document.createElement('button');
         projectItemButton.classList.add('projectItemButton');
         projectItemButton.textContent = project.getTitle();
-        projectItemButton.dataset.id = project.getId();
+        projectItemButton.dataset.projectid = project.getId();
         return projectItemButton;
     };
   

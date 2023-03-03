@@ -18,7 +18,7 @@ function generateMainContent(project){
 
     generateCreateNewItemButton(mainContent);
 
-    generateTodoPanel(mainContent, project.getTodoList());
+    generateTodoPanel(mainContent, project.getTodoList(), project.getId());
 
     html.appendChild(mainContent);
 };
@@ -47,7 +47,7 @@ function generateCreateNewItemButton(container){
 
 
 
-function generateTodoPanel(container, todoList) {
+function generateTodoPanel(container, todoList, projectID) {
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
@@ -56,10 +56,10 @@ function generateTodoPanel(container, todoList) {
         todoContainer.classList.add('todoContainer');
         
         // adding the left info component of the todo item.
-        addTodoItem(todoContainer, todoItem);
+        addTodoItem(todoContainer, todoItem, projectID);
 
         // adding the right complete button.
-        addTodoCompleteButton(todoContainer, todoItem);
+        addTodoCompleteButton(todoContainer, todoItem, projectID);
 
         todoPanel.appendChild(todoContainer);
     });
@@ -67,10 +67,11 @@ function generateTodoPanel(container, todoList) {
     container.appendChild(todoPanel);
 };
 
-function addTodoItem(container, todo) {
+function addTodoItem(container, todo, projectID) {
     const todoButton = document.createElement('button');
     todoButton.classList.add('todoItem');
-    todoButton.dataset.id = todo.getId();
+    todoButton.dataset.todoid = todo.getId();
+    todoButton.dataset.projectid = projectID;
 
     addPriorityIcon(todo.getPriority());
     addTodoTitle(todo.getTitle());
@@ -126,13 +127,12 @@ function addTodoItem(container, todo) {
 
 
 
-
-
-function addTodoCompleteButton(container, todo){
+function addTodoCompleteButton(container, todo, projectID){
 
     const completeButton = document.createElement('button'); 
     completeButton.classList.add('completeButton');
-    completeButton.dataset.id = todo.getId();
+    completeButton.dataset.todoid = todo.getId();
+    completeButton.dataset.projectid = projectID;
 
     const completeIcon = document.createElement('img');
     completeIcon.classList.add('completeIcon');
