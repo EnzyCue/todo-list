@@ -37,14 +37,21 @@ function generatePageHeading(container, title){
 
 
 function generateCreateNewItemButton(container){
-    const todoButton = document.createElement('button'); 
+    const newItemButton = document.createElement('button'); 
 
-    todoButton.classList.add('newTodoButton');
+    newItemButton.classList.add('newTodoButton');
 
-    todoButton.textContent = 'Add new item to the list';
-    container.appendChild(todoButton);
+    newItemButton.textContent = 'Add new item';
+    container.appendChild(newItemButton);
+
+    activateCreateNewItemButtonListener(newItemButton);
 };
 
+function activateCreateNewItemButtonListener(newItemButton){
+    newItemButton.addEventListener('click', () => {
+        // make a add new item form visible.
+    });
+};
 
 
 function generateTodoPanel(container, todoList) {

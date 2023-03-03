@@ -131,6 +131,8 @@ function addProjectPanelHeader(container) {
       addProjectIcon.classList.add('projectPlusSVG');
       addProjectIcon.src = projectPlusSVG;
       addProjectButton.appendChild(addProjectIcon);
+
+      activateAddProjectButtonListener(addProjectButton);
       return addProjectButton;
     };
   
@@ -139,6 +141,13 @@ function addProjectPanelHeader(container) {
     const addProjectButton = createAddProjectButton();
   
     container.append(projectsIcon, projectsButton, addProjectButton);
+};
+
+
+function activateAddProjectButtonListener(addProjectButton){
+    addProjectButton.addEventListener('click', () => {
+        // make a add new project form visible.
+    });
 };
   
 function addProjectList(container){
