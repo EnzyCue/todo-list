@@ -38,6 +38,8 @@ function generateSidebar(){
     html.appendChild(leftPanel);
 };
 
+
+
 function generateWelcomePanel(container){
     const welcome = document.createElement('div');
     welcome.classList.add('welcome');
@@ -77,6 +79,24 @@ function generateWelcomePanel(container){
 };
 
   
+
+function generateSettingsPanel(container) {
+    const settingsOption = document.createElement('div');
+    settingsOption.classList.add('settingsOption');
+
+    const settingsIcon = document.createElement('img');
+    settingsIcon.classList.add('settingsIcon');
+    settingsIcon.src = settingsSVG;
+
+    const settingsLabel = document.createElement('span');
+    settingsLabel.classList.add('settingsLabel');
+    settingsLabel.textContent = 'Settings';
+
+    settingsOption.appendChild(settingsIcon);
+    settingsOption.appendChild(settingsLabel);
+    container.appendChild(settingsOption);
+};
+
 
 
 function generateProjectPanel(container){
@@ -143,19 +163,3 @@ function addProjectList(container){
 };
 
 
-function generateSettingsPanel(container) {
-    const settingsOption = document.createElement('div');
-    settingsOption.classList.add('settingsOption');
-
-    const settingsIcon = document.createElement('img');
-    settingsIcon.classList.add('settingsIcon');
-    settingsIcon.src = settingsSVG;
-
-    const settingsLabel = document.createElement('span');
-    settingsLabel.classList.add('settingsLabel');
-    settingsLabel.textContent = 'Settings';
-
-    settingsOption.appendChild(settingsIcon);
-    settingsOption.appendChild(settingsLabel);
-    container.appendChild(settingsOption);
-};

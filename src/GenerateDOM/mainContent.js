@@ -9,38 +9,23 @@ export {generateMainContent};
 
 const html = document.querySelector('.container');
 
-function addTodoButton(container){
-
-    const todoButton = document.createElement('button'); 
-
-    todoButton.classList.add('todoButton');
-
-    todoButton.textContent = 'Add new item to the list';
-
-
-    container.appendChild(todoButton);
-
-};
 
 function generateMainContent(project){
     const mainContent = document.createElement('div');
     mainContent.classList.add('mainContent');
 
-    generateHeading(mainContent, project.getTitle());
+    generatePageHeading(mainContent, project.getTitle());
 
-    addTodoButton(mainContent);
+    generateCreateNewItemButton(mainContent);
 
     generateTodoPanel(mainContent, project.getTodoList());
 
-    
-    
     html.appendChild(mainContent);
-
 };
 
 
 
-function generateHeading(container, title){
+function generatePageHeading(container, title){
     const pageHeading = document.createElement('div');
     pageHeading.classList.add('pageHeading');
 
@@ -49,43 +34,101 @@ function generateHeading(container, title){
     container.appendChild(pageHeading);
 };
 
-function generateTodoPanel(container, todoList){
+
+
+function generateCreateNewItemButton(container){
+    const todoButton = document.createElement('button'); 
+
+    todoButton.classList.add('newTodoButton');
+
+    todoButton.textContent = 'Add new item to the list';
+    container.appendChild(todoButton);
+};
+
+
+
+function generateTodoPanel(container, todoList) {
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
-
     todoList.getTodos().forEach(todoItem => {
-        generateTodo(todoPanel, todoItem);
+        const todoContainer = document.createElement('div');
+        todoContainer.classList.add('todoContainer');
+        
+        // adding the left info component of the todo item.
+        addTodoItem(todoContainer, todoItem);
+
+        // adding the right complete button.
+        addTodoCompleteButton(todoContainer, todoItem);
+
+        todoPanel.appendChild(todoContainer);
     });
 
     container.appendChild(todoPanel);
 };
 
-function generateTodo(container, todo){
-    const todoContainer = document.createElement('div');
-    todoContainer.classList.add('todoContainer');
-
-    generateTodoItem(todoContainer, todo);
-    generateTodoIsCompleteButton(todoContainer, todo);
-
-    container.appendChild(todoContainer);
-};
-
-function generateTodoItem(container, todo){
+function addTodoItem(container, todo) {
     const todoButton = document.createElement('button');
     todoButton.classList.add('todoItem');
-
     todoButton.dataset.id = todo.getId();
-    
-    generatePrioritySvg(todoButton, todo.getPriority());
-    generateTodoTitle(todoButton, todo.getTitle());
-    generateTodoDate(todoButton, todo.getDueDate());
-    
+
+    addPriorityIcon(todo.getPriority());
+    addTodoTitle(todo.getTitle());
+    addTodoDate(todo.getDueDate());
+
     container.appendChild(todoButton);
+
+    function addTodoDate(date) {
+        const todoDate = document.createElement('span');
+        todoDate.classList.add('todoDate');
+        todoDate.textContent = date;
+        todoButton.appendChild(todoDate);
+    };
+    
+    function addTodoTitle(title) {
+        const todoTitle = document.createElement('span');
+        todoTitle.classList.add('todoTitle');
+        todoTitle.textContent = title;
+        todoButton.appendChild(todoTitle);
+    };
+
+    function addPriorityIcon(priority) {
+  
+        switch (priority) {
+          case 'high':
+            todoButton.appendChild(addIcons(3));
+            break;
+      
+          case 'medium':
+            todoButton.appendChild(addIcons(2));
+            break;
+      
+          case 'low':
+            todoButton.appendChild(addIcons(1));
+            break;
+        };
+    
+        function addIcons (count) {
+            const iconContainer = document.createElement('div');
+            iconContainer.classList.add('priorityIconContainer');
+          
+            for (let i = 0; i < count; i++) {
+              const svgIcon = document.createElement('img');
+              svgIcon.classList.add('priorityIcon');
+              svgIcon.src = prioritySVG;
+              iconContainer.appendChild(svgIcon);
+            };
+    
+            return iconContainer;
+        };
+    };
 };
 
 
-function generateTodoIsCompleteButton(container, todo){
+
+
+
+function addTodoCompleteButton(container, todo){
 
     const completeButton = document.createElement('button'); 
     completeButton.classList.add('completeButton');
@@ -107,53 +150,3 @@ function generateTodoIsCompleteButton(container, todo){
     completeButton.appendChild(completeIcon); 
     container.appendChild(completeButton); 
 };
-
-
-function generateTodoDate(container, date){
-    const todoDate = document.createElement('span');
-    todoDate.classList.add('todoDate');
-
-    todoDate.textContent = date;
-
-    container.appendChild(todoDate);
-};
-
-function generateTodoTitle(container, title){
-    const todoTitle = document.createElement('span');
-    todoTitle.classList.add('todoTitle');
-
-    todoTitle.textContent = title;
-
-    container.appendChild(todoTitle);
-};
-
-
-function generatePrioritySvg(container, priority) {
-    switch (priority) {
-      case 'high':
-        generateSvg(container, prioritySVG, 3);
-        break;
-  
-      case 'medium':
-        generateSvg(container, prioritySVG, 2);
-        break;
-  
-      case 'low':
-        generateSvg(container, prioritySVG, 1);
-        break;
-    };
-  };
-  
-  function generateSvg(container, svgSrc, count) {
-    const flexContainer = document.createElement('div');
-    flexContainer.classList.add('svgFlexContainer');
-  
-    for (let i = 0; i < count; i++) {
-      const svgIcon = document.createElement('img');
-      svgIcon.classList.add('priorityIcon');
-      svgIcon.src = svgSrc;
-      flexContainer.appendChild(svgIcon);
-    }
-  
-    container.appendChild(flexContainer);
-  };
