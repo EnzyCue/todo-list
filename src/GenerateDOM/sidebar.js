@@ -8,189 +8,194 @@ import { makeProjectFormVisible } from './createNewProjectForm.js';
 import { generateMainContent } from './mainContent';
 import { removeCurrentPage } from '../index.js';
 
+import { activateProjectFormEventListeners } from './createNewProjectForm';
 export {generateSidebar};
 
 export function addProjectToSidebar(project) {
-    const projectList = document.querySelector('.projectList');
+  const projectList = document.querySelector('.projectList');
 
-    const projectItemButton = document.createElement('button');
-    projectItemButton.classList.add('projectItemButton');
-    projectItemButton.textContent = project.getTitle();
-    projectItemButton.dataset.projectid = project.getId();
+  const projectItemButton = document.createElement('button');
+  projectItemButton.classList.add('projectItemButton');
+  projectItemButton.textContent = project.getTitle();
+  projectItemButton.dataset.projectid = project.getId();
 
-    activateProjectItemButtonListener(projectItemButton);
-  
-    projectList.appendChild(projectItemButton);
+  activateProjectItemButtonListener(projectItemButton);
+
+  projectList.appendChild(projectItemButton);
 };
 
 export function removeProjectFromSidebar(project) {
-    const projectList = document.querySelector('.projectList');
-    const projectItem = projectList.querySelector(`li[data-projectid="${project.getId()}"]`);
-  
-    projectList.removeChild(projectItem);
+  const projectList = document.querySelector('.projectList');
+  const projectItem = projectList.querySelector(`li[data-projectid="${project.getId()}"]`);
+
+  projectList.removeChild(projectItem);
 };
 
 const html = document.querySelector('.container');
 
 function generateSidebar(){
-    const leftPanel = document.createElement('div');
-    leftPanel.classList.add('leftPanel');
+  const leftPanel = document.createElement('div');
+  leftPanel.classList.add('leftPanel');
 
-    generateWelcomePanel(leftPanel);
+  generateWelcomePanel(leftPanel);
 
-    generateProjectPanel(leftPanel);
+  generateProjectPanel(leftPanel);
 
-    generateSettingsPanel(leftPanel);
-    
-    html.appendChild(leftPanel);
+  activateProjectFormEventListeners();
+
+  generateSettingsPanel(leftPanel);
+  
+  html.appendChild(leftPanel);
 };
 
 
 
 function generateWelcomePanel(container){
-    const welcome = document.createElement('div');
-    welcome.classList.add('welcome');
-  
-    const addWelcomeImage = () => {
-      const welcomeImage = document.createElement('img');
-      welcomeImage.src = profileSVG;
-      welcomeImage.classList.add('welcomeImage');
-      return welcomeImage;
-    };
-  
-    const addWelcomePackage = () => {
-      const welcomePackage = document.createElement('div');
-      welcomePackage.classList.add('welcomePackage');
-      welcomePackage.appendChild(addWelcomeMessage());
-      welcomePackage.appendChild(addWelcomeName());
-      return welcomePackage;
-    };
-    
-    const addWelcomeMessage = () => {
-      const welcomeMessage = document.createElement('div');
-      welcomeMessage.classList.add('welcomeMessage');
-      welcomeMessage.textContent = 'Welcome, ';
-      return welcomeMessage;
-    };
+  const welcome = document.createElement('div');
+  welcome.classList.add('welcome');
 
-    const addWelcomeName = () => {
-        const welcomeName = document.createElement('span');
-        welcomeName.classList.add('welcomeName');
-        welcomeName.textContent = 'Liu Fang';
-        return welcomeName;
-    };
-    
-    welcome.appendChild(addWelcomeImage());
-    welcome.appendChild(addWelcomePackage());
-    container.appendChild(welcome);
+  const addWelcomeImage = () => {
+    const welcomeImage = document.createElement('img');
+    welcomeImage.src = profileSVG;
+    welcomeImage.classList.add('welcomeImage');
+    return welcomeImage;
+  };
+
+  const addWelcomePackage = () => {
+    const welcomePackage = document.createElement('div');
+    welcomePackage.classList.add('welcomePackage');
+    welcomePackage.appendChild(addWelcomeMessage());
+    welcomePackage.appendChild(addWelcomeName());
+    return welcomePackage;
+  };
+  
+  const addWelcomeMessage = () => {
+    const welcomeMessage = document.createElement('div');
+    welcomeMessage.classList.add('welcomeMessage');
+    welcomeMessage.textContent = 'Welcome, ';
+    return welcomeMessage;
+  };
+
+  const addWelcomeName = () => {
+      const welcomeName = document.createElement('span');
+      welcomeName.classList.add('welcomeName');
+      welcomeName.textContent = 'Liu Fang';
+      return welcomeName;
+  };
+  
+  welcome.appendChild(addWelcomeImage());
+  welcome.appendChild(addWelcomePackage());
+  container.appendChild(welcome);
 };
 
   
 
 function generateSettingsPanel(container) {
-    const settingsOption = document.createElement('div');
-    settingsOption.classList.add('settingsOption');
+  const settingsOption = document.createElement('div');
+  settingsOption.classList.add('settingsOption');
 
-    const settingsIcon = document.createElement('img');
-    settingsIcon.classList.add('settingsIcon');
-    settingsIcon.src = settingsSVG;
+  const settingsIcon = document.createElement('img');
+  settingsIcon.classList.add('settingsIcon');
+  settingsIcon.src = settingsSVG;
 
-    const settingsLabel = document.createElement('span');
-    settingsLabel.classList.add('settingsLabel');
-    settingsLabel.textContent = 'Settings';
+  const settingsLabel = document.createElement('span');
+  settingsLabel.classList.add('settingsLabel');
+  settingsLabel.textContent = 'Settings';
 
-    settingsOption.appendChild(settingsIcon);
-    settingsOption.appendChild(settingsLabel);
-    container.appendChild(settingsOption);
+  settingsOption.appendChild(settingsIcon);
+  settingsOption.appendChild(settingsLabel);
+  container.appendChild(settingsOption);
 };
 
 
 
 function generateProjectPanel(container){
-    const projectPanel = document.createElement('div');
-    projectPanel.classList.add('projectPanel');
+  const projectPanel = document.createElement('div');
+  projectPanel.classList.add('projectPanel');
 
-    addProjectPanelHeader(projectPanel);
-    addProjectList(projectPanel);
+  addProjectPanelHeader(projectPanel);
+  addProjectList(projectPanel);
 
-    container.appendChild(projectPanel);
+  container.appendChild(projectPanel);
 };
 
 function addProjectPanelHeader(container) {
-    const createProjectsButton = () => {
-      const projectsButton = document.createElement('button');
-      projectsButton.classList.add('projectPanelHeaderButton');
-      projectsButton.textContent = 'Projects';
-      return projectsButton;
-    };
-  
-    const createProjectsIcon = () => {
-      const projectsIcon = document.createElement('img');
-      projectsIcon.classList.add('projectPanelSVG');
-      projectsIcon.src = projectHeaderSVG;
-      return projectsIcon;
-    };
-  
-    const createAddProjectButton = () => {
-      const addProjectButton = document.createElement('button');
-      addProjectButton.classList.add('addProjectButton');
-      const addProjectIcon = document.createElement('img');
-      addProjectIcon.classList.add('projectPlusSVG');
-      addProjectIcon.src = projectPlusSVG;
-      addProjectButton.appendChild(addProjectIcon);
+  const createProjectsButton = () => {
+    const projectsButton = document.createElement('button');
+    projectsButton.classList.add('projectPanelHeaderButton');
+    projectsButton.textContent = 'Projects';
+    return projectsButton;
+  };
 
-      activateAddProjectButtonListener(addProjectButton);
-      return addProjectButton;
-    };
-  
-    const projectsButton = createProjectsButton();
-    const projectsIcon = createProjectsIcon();
-    const addProjectButton = createAddProjectButton();
-  
-    container.append(projectsIcon, projectsButton, addProjectButton);
+  const createProjectsIcon = () => {
+    const projectsIcon = document.createElement('img');
+    projectsIcon.classList.add('projectPanelSVG');
+    projectsIcon.src = projectHeaderSVG;
+    return projectsIcon;
+  };
+
+  const createAddProjectButton = () => {
+    const addProjectButton = document.createElement('button');
+    addProjectButton.classList.add('addProjectButton');
+    const addProjectIcon = document.createElement('img');
+    addProjectIcon.classList.add('projectPlusSVG');
+    addProjectIcon.src = projectPlusSVG;
+    addProjectButton.appendChild(addProjectIcon);
+
+    activateAddProjectButtonListener(addProjectButton);
+    return addProjectButton;
+  };
+
+  const projectsButton = createProjectsButton();
+  const projectsIcon = createProjectsIcon();
+  const addProjectButton = createAddProjectButton();
+
+  container.append(projectsIcon, projectsButton, addProjectButton);
 };
 
 
 function activateAddProjectButtonListener(addProjectButton){
     
-    addProjectButton.addEventListener('click', () => {
-        makeProjectFormVisible();
-    });
+  addProjectButton.addEventListener('click', () => {
+      makeProjectFormVisible();
+  });
 };
   
 function addProjectList(container){
-    const projectList = document.createElement('div');
-    projectList.classList.add('projectList');
-  
-    myProjects.getProjectList().forEach(project => {
-      const projectItemButton = createProjectItemButton(project);
-      projectList.appendChild(projectItemButton);
-    });
+  const projectList = document.createElement('div');
+  projectList.classList.add('projectList');
+
+  myProjects.getProjectList().forEach(project => {
+    const projectItemButton = createProjectItemButton(project);
+    projectList.appendChild(projectItemButton);
+  });
 
 
-    function createProjectItemButton(project) {
-        const projectItemButton = document.createElement('button');
-        projectItemButton.classList.add('projectItemButton');
-        projectItemButton.textContent = project.getTitle();
-        projectItemButton.dataset.projectid = project.getId();
+  function createProjectItemButton(project) {
+      const projectItemButton = document.createElement('button');
+      projectItemButton.classList.add('projectItemButton');
+      projectItemButton.textContent = project.getTitle();
+      projectItemButton.dataset.projectid = project.getId();
 
-        activateProjectItemButtonListener(projectItemButton);
-        return projectItemButton;
-    };
-  
-    container.appendChild(projectList);
+      activateProjectItemButtonListener(projectItemButton);
+      return projectItemButton;
+  };
+
+  container.appendChild(projectList);
 };
 
 function activateProjectItemButtonListener(projectItemButton){
-    projectItemButton.addEventListener('click', () => {
+  projectItemButton.addEventListener('click', () => {
 
-        removeCurrentPage();
-    
-        const projectID = parseInt(projectItemButton.dataset.projectid);
-        const projectSelected = myProjects.getProjectById(projectID);
-    
-        generateMainContent(projectSelected);
-    });
+      removeCurrentPage();
+  
+      const projectID = parseInt(projectItemButton.dataset.projectid);
+      const projectSelected = myProjects.getProjectById(projectID);
+  
+      generateMainContent(projectSelected);
+  });
 };
+
+
 
 

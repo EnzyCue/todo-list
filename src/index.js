@@ -3,9 +3,6 @@ import { setupInitalProjects } from "./appLogic/initialSetup";
 import { myProjects } from "./appLogic/initialSetup";
 import { generateMainContent } from "./GenerateDOM/mainContent";
 
-import progressIconComplete from './svg/progressIconComplete.png';
-import progressIconUnfinished from './svg/progressIconUnfinished.png';
-
 import './style.css';
 
 export function removeCurrentPage(){
@@ -21,7 +18,6 @@ const defaultProject = setupInitalProjects();
 generateSidebar();
 
 generateMainContent(defaultProject);
-
 
 // event listener for loading default project from sidebar by clicking on it
 
@@ -41,8 +37,6 @@ defaultProjectButton.addEventListener('click', () => {
 
 
 // event listener for clicking on the todo item.
-
-
 
 
 
