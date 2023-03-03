@@ -3,7 +3,7 @@ import prioritySVG from '../svg/prioritySVGHigh.png';
 import progressIconComplete from '../svg/progressIconComplete.png';
 import progressIconUnfinished from '../svg/progressIconUnfinished.png';
 
-import { project } from '../appLogic/projectObject';
+import { myProjects } from "../appLogic/initialSetup";
 
 export {generateMainContent};
 
@@ -18,7 +18,7 @@ function generateMainContent(project){
 
     generateCreateNewItemButton(mainContent);
 
-    generateTodoPanel(mainContent, project.getTodoList(), project.getId());
+    generateTodoPanel(mainContent, project.getTodoList());
 
     html.appendChild(mainContent);
 };
@@ -47,7 +47,7 @@ function generateCreateNewItemButton(container){
 
 
 
-function generateTodoPanel(container, todoList, projectID) {
+function generateTodoPanel(container, todoList) {
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
@@ -56,10 +56,10 @@ function generateTodoPanel(container, todoList, projectID) {
         todoContainer.classList.add('todoContainer');
         
         // adding the left info component of the todo item.
-        addTodoItem(todoContainer, todoItem, projectID);
+        addTodoItem(todoContainer, todoItem);
 
         // adding the right complete button.
-        addTodoCompleteButton(todoContainer, todoItem, projectID);
+        addTodoCompleteButton(todoContainer, todoItem);
 
         todoPanel.appendChild(todoContainer);
     });
@@ -67,10 +67,17 @@ function generateTodoPanel(container, todoList, projectID) {
     container.appendChild(todoPanel);
 };
 
-function addTodoItem(container, todo, projectID) {
+function addTodoItem(container, todo) {
     const todoButton = document.createElement('button');
     todoButton.classList.add('todoItem');
-    todoButton.dataset.todoid = todo.getId();
+
+
+    const todoID = todo.getId();
+    const parentProject = myProjects.getProjectByTodoId(todoID);
+    const projectID = parentProject.getId();
+
+
+    todoButton.dataset.todoid = todoID;
     todoButton.dataset.projectid = projectID;
 
     addPriorityIcon(todo.getPriority());
@@ -127,11 +134,16 @@ function addTodoItem(container, todo, projectID) {
 
 
 
-function addTodoCompleteButton(container, todo, projectID){
+function addTodoCompleteButton(container, todo){
 
     const completeButton = document.createElement('button'); 
     completeButton.classList.add('completeButton');
-    completeButton.dataset.todoid = todo.getId();
+
+    const todoID = todo.getId();
+    const parentProject = myProjects.getProjectByTodoId(todoID);
+    const projectID = parentProject.getId();
+    
+    completeButton.dataset.todoid = todoID;
     completeButton.dataset.projectid = projectID;
 
     const completeIcon = document.createElement('img');
@@ -147,6 +159,35 @@ function addTodoCompleteButton(container, todo, projectID){
             break;
     };
 
+
+
     completeButton.appendChild(completeIcon); 
     container.appendChild(completeButton); 
+    activateCompleteButtonListener(completeButton, completeIcon, todo);
+};
+
+
+function activateCompleteButtonListener(completeButton, completeIcon, todo){
+    
+    completeButton.addEventListener('click', () => {
+        const newComplete = !todo.getIsComplete();
+        todo.setIsComplete(newComplete);
+
+        changeTodoCompleteness(newComplete);
+    });
+
+
+    function changeTodoCompleteness(newComplete){
+
+        switch(newComplete){
+            case true:
+                completeIcon.src = progressIconComplete;
+                break;
+
+            case false:
+                completeIcon.src = progressIconUnfinished;
+                break;
+        };
+    };
+
 };

@@ -44,24 +44,8 @@ defaultProjectButton.addEventListener('click', () => {
 
 // event listener for clicking the check mark
 
-const completeButton = document.querySelector('.completeButton');
-
-completeButton.addEventListener('click', () => {
-    const projectID = parseInt(completeButton.dataset.projectid);
-    const projectSelected = myProjects.getProjectById(projectID);
-
-    const todoID = parseInt(completeButton.dataset.id);
-    console.log({projectID});
-    const todoSelected = (projectSelected.getTodoList()).getTodoById(todoID);
-
-    newComplete =  !todoSelected.getIsComplete();
-    todoSelected.setIsComplete(newComplete);
-    // defaul project is screwing up your id system!!!
-    // changeTodoCompleteness
 
 
-
-});
 
 // event listener for adding a project from sidebar
 
@@ -86,18 +70,3 @@ function removeCurrentPage(){
     });
 };
 
-function changeTodoCompleteness(newComplete){
-    // const completeButton = document.querySelector('.completeButton');
-
-    const completeIcon = document.querySelector('.completeIcon');
-
-    switch(newComplete){
-        case true:
-            completeIcon.src = progressIconComplete;
-            break;
-
-        case false:
-            completeIcon.src = progressIconUnfinished;
-            break;
-    };
-};

@@ -32,6 +32,8 @@ function setupInitalProjects() {
         todo("Improve user interface", "Redesign the user interface to improve user experience and make the website more intuitive to use", "17/04/2023", "medium", false, ++globalTodoCounter)
     ];
 
+    const defaultProject = setupDefaultProject(exampleTodos);
+
     const todosSet1 = exampleTodos.slice(0, 6);
     const todosSet2 = exampleTodos.slice(6, 11);
     const todosSet3 = exampleTodos.slice(11);
@@ -41,7 +43,7 @@ function setupInitalProjects() {
     setupExampleProject("Product Development Project", todosSet3);
 
 
-    const defaultProject = setupDefaultProject(exampleTodos);
+    
 
     return defaultProject;
     
@@ -56,7 +58,6 @@ function setupExampleProject(title, todoSet){
 
     const theProject = project(title, globalProjectCounter++);
     theProject.setTodoList(todoList);
-
     myProjects.addProject(theProject);
 
 };

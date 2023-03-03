@@ -28,12 +28,17 @@ const myProjects = (() => {
     return getProjectList().find(project => project.getId() === id);
   };
 
+  const getProjectByTodoId = (id) => {
+    return getProjectList().find(project => project.getTodoList().getTodoById(id) != undefined);
+  };
+
   return {
     addProject,
     removeProject,
     getProjectList,
     setProjectList,
     getProjectById,
+    getProjectByTodoId,
   };
 })();
   
