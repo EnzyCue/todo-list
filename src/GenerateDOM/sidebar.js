@@ -4,14 +4,21 @@ import settingsSVG from '../svg/settings.png';
 import projectPlusSVG from '../svg/plus.png';
 import projectHeaderSVG from '../svg/layers.png';
 
+import { makeProjectFormVisible } from './createNewProjectForm.js';
+import { generateMainContent } from './mainContent';
+import { removeCurrentPage } from '../index.js';
+
 export {generateSidebar};
 
 export function addProjectToSidebar(project) {
     const projectList = document.querySelector('.projectList');
 
-    const projectItemButton = document.createElement('projectItemButton');
+    const projectItemButton = document.createElement('button');
+    projectItemButton.classList.add('projectItemButton');
     projectItemButton.textContent = project.getTitle();
     projectItemButton.dataset.projectid = project.getId();
+
+    activateProjectItemButtonListener(projectItemButton);
   
     projectList.appendChild(projectItemButton);
 };
@@ -145,8 +152,9 @@ function addProjectPanelHeader(container) {
 
 
 function activateAddProjectButtonListener(addProjectButton){
+    
     addProjectButton.addEventListener('click', () => {
-        // make a add new project form visible.
+        makeProjectFormVisible();
     });
 };
   
@@ -165,10 +173,24 @@ function addProjectList(container){
         projectItemButton.classList.add('projectItemButton');
         projectItemButton.textContent = project.getTitle();
         projectItemButton.dataset.projectid = project.getId();
+
+        activateProjectItemButtonListener(projectItemButton);
         return projectItemButton;
     };
   
     container.appendChild(projectList);
+};
+
+function activateProjectItemButtonListener(projectItemButton){
+    projectItemButton.addEventListener('click', () => {
+
+        removeCurrentPage();
+    
+        const projectID = parseInt(projectItemButton.dataset.projectid);
+        const projectSelected = myProjects.getProjectById(projectID);
+    
+        generateMainContent(projectSelected);
+    });
 };
 
 

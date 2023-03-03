@@ -8,27 +8,19 @@ import progressIconUnfinished from './svg/progressIconUnfinished.png';
 
 import './style.css';
 
+export function removeCurrentPage(){
+    const html = document.querySelectorAll('.container > :not(.leftPanel)');
+    html.forEach((child) => {
+        child.parentNode.removeChild(child);
+    });
+};
+
+
 const defaultProject = setupInitalProjects();
 
 generateSidebar();
 
 generateMainContent(defaultProject);
-
-// event listener for loading a project from sidebar by clicking on it
-
-const projectItemButtonGroup = document.querySelectorAll('.projectItemButton');
-
-projectItemButtonGroup.forEach(projectItemButton => {
-    projectItemButton.addEventListener('click', () => {
-
-        removeCurrentPage();
-
-        const projectID = parseInt(projectItemButton.dataset.projectid);
-        const projectSelected = myProjects.getProjectById(projectID);
-
-        generateMainContent(projectSelected);
-    });
-});
 
 
 // event listener for loading default project from sidebar by clicking on it
@@ -42,16 +34,6 @@ defaultProjectButton.addEventListener('click', () => {
     generateMainContent(defaultProject);
 });
 
-// event listener for clicking the check mark
-
-
-
-
-// event listener for adding a project from sidebar
-
-
-
-
 
 // event listener for adding a new todo item from side bar.
 
@@ -63,10 +45,4 @@ defaultProjectButton.addEventListener('click', () => {
 
 
 
-function removeCurrentPage(){
-    const html = document.querySelectorAll('.container > :not(.leftPanel)');
-    html.forEach((child) => {
-        child.parentNode.removeChild(child);
-    });
-};
 
