@@ -46,6 +46,6 @@ export function activateProjectFormEventListeners(){
         addProjectToSidebar(newProject);
     
     });
-  };
+};
 
 

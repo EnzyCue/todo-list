@@ -259,14 +259,14 @@ body{
 
 
 .newProjectForm{
-    grid-template-rows: 1fr 2fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
     grid-template-columns: 1fr 4fr;
     row-gap: 1rem;
     column-gap:1px; 
 }
 
 .newTodoForm{
-    grid-template-rows: 1fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 4fr;
 }
 
@@ -332,7 +332,7 @@ label{
     text-align: center;
 }
 
-input {
+input, select {
     background-color: #FFFFFF;
     border: 2px solid #D6D9DC;
     border-radius: 3px;

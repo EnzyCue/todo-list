@@ -5,10 +5,26 @@ import progressIconUnfinished from '../svg/progressIconUnfinished.png';
 
 import { myProjects } from "../appLogic/initialSetup";
 
+import { makeTodoFormVisible, activateTodoFormEventListeners } from './createNewTodoForm';
+
 export {generateMainContent};
 
 const html = document.querySelector('.container');
 
+export function displayNewTodo(todo){
+    const todoPanel = document.querySelector('.todoPanel');
+
+    const todoContainer = document.createElement('div');
+    todoContainer.classList.add('todoContainer');
+    
+    // adding the left info component of the todo item.
+    addTodoItem(todoContainer, todo);
+
+    // adding the right complete button.
+    addTodoCompleteButton(todoContainer, todo);
+
+    todoPanel.appendChild(todoContainer);
+};
 
 function generateMainContent(project){
     const mainContent = document.createElement('div');
@@ -17,6 +33,8 @@ function generateMainContent(project){
     generatePageHeading(mainContent, project.getTitle());
 
     generateCreateNewItemButton(mainContent);
+
+    activateTodoFormEventListeners();
 
     generateTodoPanel(mainContent, project.getTodoList());
 
@@ -50,9 +68,9 @@ function generateCreateNewItemButton(container){
 function activateCreateNewItemButtonListener(newItemButton){
     newItemButton.addEventListener('click', () => {
         // make a add new item form visible.
+        makeTodoFormVisible();
     });
 };
-
 
 function generateTodoPanel(container, todoList) {
     const todoPanel = document.createElement('div');

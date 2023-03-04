@@ -1,7 +1,8 @@
-import { Todo } from "../appLogic/todoObject";
+import { todo } from "../appLogic/toDoObject";
 import { globalTodoCounter, incrementTodoCounter } from "../appLogic/initialSetup";
 import { myProjects } from "../appLogic/initialSetup";
-import { addTodoItem } from './todoList';
+import { addTodoItem } from '../appLogic/toDoListObject.js';
+import { displayNewTodo } from "./mainContent";
 
 const todoForm = document.querySelector('.newTodoForm');
 const html = document.querySelector('.container');
@@ -9,6 +10,7 @@ const html = document.querySelector('.container');
 export function makeTodoFormVisible() {
   todoForm.style.visibility = 'visible';
   html.style.filter = 'blur(5px)';
+  projectSelectionFiller();
 }
 
 export function activateTodoFormEventListeners() {
@@ -27,30 +29,59 @@ export function activateTodoFormEventListeners() {
   submitButton.addEventListener('click', () => {
     const todoTitle = document.querySelector('#todoTitle').value;
     const todoDueDate = document.querySelector('#todoDueDate').value;
-    const todoPriority = document.querySelector('#todoPriority').value;
+    const todoPriority = radioButtonChecker(todoForm.elements.priority);
 
     console.log('we in');
 
     console.log(todoTitle, todoDueDate, todoPriority);
 
-    const newTodo = new Todo(
+    const newTodo = todo(
       todoTitle,
+      'Filler Description',
       todoDueDate,
       todoPriority,
+      false,
       globalTodoCounter
     );
     incrementTodoCounter();
 
-    const selectedProjectID = parseInt(
-      document.querySelector('#projectSelector').value
-    );
-    const selectedProject = myProjects.getProjectById(selectedProjectID);
-    selectedProject.addTodoToList(newTodo);
+    const selectedProjectId = document.querySelector('#projectSelect').value;
+    console.log(selectedProjectId);
+    const selectedProject = myProjects.getProjectById(parseInt(selectedProjectId));
+    selectedProject.getTodoList().addTodo(newTodo);
+
+    displayNewTodo(newTodo);
 
     todoForm.reset();
     todoForm.style.visibility = 'hidden';
     html.style.filter = 'none';
-
-    addTodoItem(selectedProject.getContainer(), newTodo);
   });
-}
+};
+
+function projectSelectionFiller(){
+    const projectSelect = document.querySelector('#projectSelect');
+    const projectList = [];
+    myProjects.getProjectList().forEach(project => {
+        projectList.push({id: project.getId(), title: project.getTitle()})
+    });
+
+    for (let i = 0; i < projectList.length; i++) {
+        const option = document.createElement('option');
+        option.value = projectList[i].id;
+        option.textContent = projectList[i].title;
+        projectSelect.appendChild(option);
+    };
+};
+
+
+function radioButtonChecker(radios){
+    let selectedValue;
+
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        selectedValue = radios[i].value;
+        break;
+      }
+    }
+    return selectedValue;
+};
