@@ -22,7 +22,56 @@
         </div>
     
         <label for="projectTitle">Project Title </label>
-        <input type="text" id="projectTitle" name="title" maxlength="20">
+        <input type="text" id="projectTitle" name="title" maxlength="55">
+    
+        <button type="button" class="submitButton">Submit</button>
+        <button type="reset" class="resetButton">Reset</button>
+    </form>
+
+    <form class="newTodoForm" action="" style="visibility: visible;">
+        <div class="formHeader">
+            <h3>Add New Task Entry</h3>
+            <button type="button" class="cancelButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+                    <line x1="20" y1="20" x2="40" y2="40" stroke="#FFFFFF" stroke-width="6"/>
+                    <line x1="40" y1="20" x2="20" y2="40" stroke="#FFFFFF" stroke-width="6"/>
+                  </svg>                  
+            </button>
+        </div>
+
+        <label for="todoTitle">Task Title </label>
+        <input type="text" id="todoTitle" name="title" maxlength="35">
+
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate">
+
+        <div class="priorityLabel">Priority: </div>
+
+        <div class="prioritySelection">
+            <div class="priorityHigh">
+                <input type="radio" name="priority" value="high" id="high">
+                <div class="priorityIconContainer">
+                    <img src="d72b6fa5600de9b7dab6.png">
+                    <img src="d72b6fa5600de9b7dab6.png">
+                    <img src="d72b6fa5600de9b7dab6.png">
+                </div>
+            </div>
+            
+            <div class="priorityMedium">
+            <input type="radio" name="priority" value="medium" id="medium">
+            <div class="priorityIconContainer">
+                <img src="d72b6fa5600de9b7dab6.png">
+                <img src="d72b6fa5600de9b7dab6.png">
+            </div>
+            </div>
+
+            <div class="priorityLow">
+            <input type="radio" name="priority" value="low" id="low">
+            <div class="priorityIconContainer">
+                <img src="d72b6fa5600de9b7dab6.png">
+            </div>
+            </div>
+        </div>
     
         <button type="button" class="submitButton">Submit</button>
         <button type="reset" class="resetButton">Reset</button>
