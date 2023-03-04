@@ -121,7 +121,7 @@ body{
     background: linear-gradient(to bottom right, #6fcdff, #33f59f);
     color: black;
     width: 20rem;
-    height: 4rem;
+    height: min-content;
     padding: 1rem 1.5rem;
     font-size: 20px;
     text-transform: capitalize;
@@ -129,6 +129,7 @@ body{
     transition: transform 0.2s ease-in-out;
     text-align: center;
     margin-left: 2rem;
+    word-break: break-all;
 }
 
 .leftPanel .projectList button:hover{
@@ -154,7 +155,6 @@ body{
     grid-column: 2 / 3;
 }
 .mainContent .pageHeading {
-    
     font-size: 50px;
     font-weight: 900;
     color: #fff;
@@ -167,6 +167,7 @@ body{
     border-bottom: 3px solid rgb(0, 0, 0);
     text-align: center;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .newTodoButton{
@@ -257,16 +258,28 @@ body{
 }
 
 
+.newProjectForm{
+    grid-template-rows: 1fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 4fr;
+    row-gap: 1rem;
+    column-gap:1px; 
+}
+
+.newTodoForm{
+    grid-template-rows: 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 4fr;
+}
+
 form {
     box-sizing: border-box;
     background-color: #000000;
     border-radius: 1rem;
     width: 50rem;
     display: grid;
-    grid-template-rows: 1fr 2fr  1fr;
-    grid-template-columns: 1fr 4fr;
     row-gap: 1rem;
     column-gap:1px; 
+    grid-template-rows: 1fr 2fr  1fr;
+    grid-template-columns: 1fr 4fr;
     padding-left: 2rem;
     padding-right: 0;
     padding-bottom: 2rem;
@@ -371,3 +384,28 @@ form button{
     justify-self: end;
     margin-right: 1rem;
 }
+
+.priorityLabel{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+.prioritySelection {
+    display: flex;
+    gap: 3rem;
+    
+}
+.prioritySelection  div{
+    display: flex;
+    gap: 1rem;
+    /* border: 2px solid white;
+    border-top: 2px solid white;
+    border-right: 2px solid white; */
+    padding: 0.5rem;
+}
+.prioritySelection .priorityIconContainer{
+    border: 2px solid white;
+    border-radius:15px;
+    padding: 0.5rem 1rem;
+}
+
