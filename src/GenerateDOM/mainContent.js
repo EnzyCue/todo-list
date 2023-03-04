@@ -23,6 +23,8 @@ export function displayNewTodo(todo){
     // adding the right complete button.
     addTodoCompleteButton(todoContainer, todo);
 
+    addTodoDescription(todoPanel, todo);
+
     todoPanel.appendChild(todoContainer);
 };
 
@@ -65,7 +67,6 @@ function generateCreateNewItemButton(container){
 
 function activateCreateNewItemButtonListener(newItemButton){
     newItemButton.addEventListener('click', () => {
-        // make a add new item form visible.
         makeTodoFormVisible();
     });
 };
@@ -74,20 +75,31 @@ function generateTodoPanel(container, todoList) {
     const todoPanel = document.createElement('div');
     todoPanel.classList.add('todoPanel');
 
-    todoList.getTodos().forEach(todoItem => {
+    todoList.getTodos().forEach(todo => {
         const todoContainer = document.createElement('div');
         todoContainer.classList.add('todoContainer');
         
         // adding the left info component of the todo item.
-        addTodoItem(todoContainer, todoItem);
+        addTodoItem(todoContainer, todo);
 
         // adding the right complete button.
-        addTodoCompleteButton(todoContainer, todoItem);
+        addTodoCompleteButton(todoContainer, todo);
+
+        addTodoDescription(todoPanel, todo);
 
         todoPanel.appendChild(todoContainer);
     });
 
     container.appendChild(todoPanel);
+};
+
+function addTodoDescription(container, todo){
+    const todoDescription = document.createElement('div');
+    todoDescription.classList.add('todoDescription');
+    todoDescription.textContent = todo.getDescription();
+    todoDescription.style.display = 'none';
+
+    container.appendChild(todoDescription);
 };
 
 function addTodoItem(container, todo) {
@@ -107,7 +119,6 @@ function addTodoItem(container, todo) {
     addTodoTitle(todo.getTitle());
     addTodoDate(todo.getDueDate());
 
-    // insert code for generating the discription drop-down!
 
     container.appendChild(todoButton);
 
@@ -155,6 +166,8 @@ function addTodoItem(container, todo) {
             return iconContainer;
         };
     };
+
+    activateTodoButtonListener(todoButton);
 };
 
 
@@ -189,6 +202,26 @@ function addTodoCompleteButton(container, todo){
     completeButton.appendChild(completeIcon); 
     container.appendChild(completeButton); 
     activateCompleteButtonListener(completeButton, completeIcon, todo);
+};
+
+
+function activateTodoButtonListener(todoButton){
+
+    todoButton.addEventListener('click', () => {
+        // selecting the previous sibling because the flex direction is reverse-column
+        const todoContainer = todoButton.parentNode;
+        const  todoDescription = todoContainer.previousElementSibling;
+
+        // make the description visible
+        let descriptionState = todoDescription.style.display;
+
+        if (descriptionState === 'inline' ){
+            todoDescription.style.display = 'none'; 
+        } else if (descriptionState === 'none'){
+            todoDescription.style.display = 'inline';
+        };
+
+    });
 };
 
 

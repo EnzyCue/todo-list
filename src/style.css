@@ -20,6 +20,7 @@ body{
     height: 100%;
     display: grid;
     grid-template-columns: 25rem 1fr;
+    background: hsl(201deg 6% 96%);
 }
 
 .leftPanel {
@@ -72,7 +73,7 @@ body{
 .leftPanel .projectPanelHeaderButton {
     border: none;
     border-radius: 0.7rem;
-    background: white;
+    background: hsl(201deg 6% 96%);
     color: black;
     padding: 1rem 1.5rem;
     text-transform: capitalize;
@@ -160,7 +161,7 @@ body{
     font-size: 50px;
     font-weight: 900;
     color: #fff;
-    background: linear-gradient(to bottom right, #6fcdff, #33f59f);
+    background: linear-gradient(to bottom right, hsl(201deg 100% 50%), hsl(153deg 91% 58%));
     width: 100%;
     height: 15rem;
     display: flex;
@@ -194,7 +195,7 @@ body{
     align-items: center;
     gap: 1rem;
     width: 95%;
-    margin: 1rem 0 1rem 0;
+    margin: 1rem 0 2rem 0;
 }
 .todoItem{
     display: flex;
@@ -219,7 +220,7 @@ body{
 }
 
 .todoItem:hover {
-    background-color: #ffffff;
+    background-color: hsl(201deg 6% 96%);
     color: black;
 
 }
@@ -259,6 +260,25 @@ body{
     background-color: black;
     color: black;
 
+}
+
+.todoDescription {
+    padding: 1rem 1.5rem;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: white;
+    background-color: #3b3b3b;
+    border: none;
+    width: 90%;
+    border: 3px solid black ;
+    border-radius: 0.7rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -1.2rem;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 
