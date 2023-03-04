@@ -36,11 +36,6 @@ defaultProjectButton.addEventListener('click', () => {
 });
 
 
-// event listener for adding a new todo item from side bar.
-
-
-
-
 // event listener for clicking on the todo item.
 
 

@@ -13,59 +13,64 @@ export function makeTodoFormVisible() {
 }
 
 export function activateTodoFormEventListeners() {
-  const todoForm = document.querySelector('.newTodoForm');
 
-  const cancelButton = document.querySelector('.newTodoForm .cancelButton');
+    
+    const todoForm = document.querySelector('.newTodoForm');
+    const cancelButton = document.querySelector('.newTodoForm .cancelButton');
+    const submitButton = document.querySelector('.newTodoForm .submitButton');
 
-  cancelButton.addEventListener('click', () => {
-    todoForm.reset();
-    todoForm.style.visibility = 'hidden';
-    html.style.filter = 'none';
-  });
+    const todoTitleInput = document.querySelector('#todoTitle');
+    const todoDueDateInput = document.querySelector('#todoDueDate');
+    const todoPriorityInput = todoForm.elements.priority;
+    const projectSelectInput = document.querySelector('#projectSelect');
 
-  const today = new Date().toISOString().split('T')[0];
-  document.querySelector('input[type="date"]').value = today;
-  
 
-  projectSelectionFiller();
+    
+    cancelButton.addEventListener('click', () => {
+      todoForm.reset();
+      todoForm.style.visibility = 'hidden';
+      html.style.filter = 'none';
+    });
+    
 
-  const submitButton = document.querySelector('.newTodoForm .submitButton');
+    
+    submitButton.addEventListener('click', () => {
+      const todoTitle = todoTitleInput.value;
+      const todoDueDate = todoDueDateInput.value;
+      const todoPriority = radioButtonChecker(todoPriorityInput);
+    
+      console.log('we in');
+      console.log(todoTitle, todoDueDate, todoPriority);
+    
+      const newTodo = todo(
+        todoTitle,
+        'Filler Description',
+        todoDueDate,
+        todoPriority,
+        false,
+        globalTodoCounter
+      );
+      incrementTodoCounter();
+    
+      const selectedProjectId = projectSelectInput.value;
+      console.log(selectedProjectId);
+    
+      const selectedProject = myProjects.getProjectById(parseInt(selectedProjectId));
+      selectedProject.getTodoList().addTodo(newTodo);
+      defaultProject.getTodoList().addTodo(newTodo);
+    
+      displayNewTodo(newTodo);
+    
+      todoForm.reset();
+      todoForm.style.visibility = 'hidden';
+      html.style.filter = 'none';
+    });
+    
+    // loads today's date into date form control
+    document.querySelector('input[type="date"]').value = new Date().toISOString().split('T')[0];
+    //  loads current projects into selection form control
+    projectSelectionFiller();
 
-  submitButton.addEventListener('click', () => {
-    const todoTitle = document.querySelector('#todoTitle').value;
-    const todoDueDate = document.querySelector('#todoDueDate').value;
-    const todoPriority = radioButtonChecker(todoForm.elements.priority);
-
-    console.log('we in');
-
-    console.log(todoTitle, todoDueDate, todoPriority);
-
-    const newTodo = todo(
-      todoTitle,
-      'Filler Description',
-      todoDueDate,
-      todoPriority,
-      false,
-      globalTodoCounter
-    );
-    incrementTodoCounter();
-
-    const selectedProjectId = document.querySelector('#projectSelect').value;
-    console.log(selectedProjectId);
-
-    const selectedProject = myProjects.getProjectById(parseInt(selectedProjectId));
-
-    selectedProject.getTodoList().addTodo(newTodo);
-    defaultProject.getTodoList().addTodo(newTodo);
-
-    displayNewTodo(newTodo);
-
-    todoForm.reset();
-    todoForm.style.visibility = 'hidden';
-    html.style.filter = 'none';
-  });
-
-  
 };
 
 function projectSelectionFiller(){

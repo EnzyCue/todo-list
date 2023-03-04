@@ -107,6 +107,8 @@ function addTodoItem(container, todo) {
     addTodoTitle(todo.getTitle());
     addTodoDate(todo.getDueDate());
 
+    // insert code for generating the discription drop-down!
+
     container.appendChild(todoButton);
 
     function addTodoDate(date) {
