@@ -53,9 +53,9 @@ function setupInitalProjects() {
     const todosSet2 = exampleTodos.slice(6, 11);
     const todosSet3 = exampleTodos.slice(11);
   
-    setupExampleProject("Website Redesign Project", todosSet1);
-    setupExampleProject("Server Optimization Project", todosSet2);
-    setupExampleProject("Product Development Project", todosSet3);
+    setupExampleProject("Website Redesign", todosSet1);
+    setupExampleProject("Server Optimization", todosSet2);
+    setupExampleProject("Product Development", todosSet3);
 
 
     
