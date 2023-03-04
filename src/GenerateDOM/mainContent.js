@@ -97,7 +97,7 @@ function addTodoDescription(container, todo){
     const todoDescription = document.createElement('div');
     todoDescription.classList.add('todoDescription');
     todoDescription.textContent = todo.getDescription();
-    todoDescription.style.display = 'none';
+    // todoDescription.style.display = 'none';
 
     container.appendChild(todoDescription);
 };
@@ -212,15 +212,8 @@ function activateTodoButtonListener(todoButton){
         const todoContainer = todoButton.parentNode;
         const  todoDescription = todoContainer.previousElementSibling;
 
-        // make the description visible
-        let descriptionState = todoDescription.style.display;
 
-        if (descriptionState === 'inline' ){
-            todoDescription.style.display = 'none'; 
-        } else if (descriptionState === 'none'){
-            todoDescription.style.display = 'inline';
-        };
-
+        todoDescription.classList.toggle('show');
     });
 };
 

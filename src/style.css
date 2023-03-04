@@ -263,7 +263,7 @@ body{
 }
 
 .todoDescription {
-    padding: 1rem 1.5rem;
+    padding: 0;
     font-size: 18px;
     font-weight: 600;
     text-align: center;
@@ -272,15 +272,22 @@ body{
     background-color: #3b3b3b;
     border: none;
     width: 90%;
-    border: 3px solid black ;
     border-radius: 0.7rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin-top: -1.2rem;
-    max-height: 300px;
-    overflow-y: auto;
-}
+    overflow-y: hidden;
+    max-height: 0;
+    transition: max-height 0.1s ease-out, padding 0.1s ease-in, border 0.1s ease-in;
 
+}
+.todoDescription.show{
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    border: 3px solid black ;
+    /* transition: max-height 0.1s ease-in, padding 0.1s ease-in, border 0.1s ease-in; */
+}
 
 .newProjectForm{
     grid-template-rows: 1fr 2fr 1fr;
