@@ -8,7 +8,6 @@ import { makeProjectFormVisible } from './createNewProjectForm.js';
 import { generateMainContent } from './mainContent';
 import { removeCurrentPage } from '../index.js';
 
-import { activateProjectFormEventListeners } from './createNewProjectForm';
 export {generateSidebar};
 
 export function addProjectToSidebar(project) {
@@ -40,8 +39,6 @@ function generateSidebar(){
   generateWelcomePanel(leftPanel);
 
   generateProjectPanel(leftPanel);
-
-  activateProjectFormEventListeners();
 
   generateSettingsPanel(leftPanel);
   

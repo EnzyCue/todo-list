@@ -1,8 +1,8 @@
 import { todo } from "../appLogic/toDoObject";
 import { globalTodoCounter, incrementTodoCounter } from "../appLogic/initialSetup";
 import { myProjects } from "../appLogic/initialSetup";
-import { addTodoItem } from '../appLogic/toDoListObject.js';
 import { displayNewTodo } from "./mainContent";
+import { defaultProject } from '../index'
 
 const todoForm = document.querySelector('.newTodoForm');
 const html = document.querySelector('.container');
@@ -10,7 +10,6 @@ const html = document.querySelector('.container');
 export function makeTodoFormVisible() {
   todoForm.style.visibility = 'visible';
   html.style.filter = 'blur(5px)';
-  projectSelectionFiller();
 }
 
 export function activateTodoFormEventListeners() {
@@ -23,6 +22,12 @@ export function activateTodoFormEventListeners() {
     todoForm.style.visibility = 'hidden';
     html.style.filter = 'none';
   });
+
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('input[type="date"]').value = today;
+  
+
+  projectSelectionFiller();
 
   const submitButton = document.querySelector('.newTodoForm .submitButton');
 
@@ -47,8 +52,11 @@ export function activateTodoFormEventListeners() {
 
     const selectedProjectId = document.querySelector('#projectSelect').value;
     console.log(selectedProjectId);
+
     const selectedProject = myProjects.getProjectById(parseInt(selectedProjectId));
+
     selectedProject.getTodoList().addTodo(newTodo);
+    defaultProject.getTodoList().addTodo(newTodo);
 
     displayNewTodo(newTodo);
 
@@ -56,6 +64,8 @@ export function activateTodoFormEventListeners() {
     todoForm.style.visibility = 'hidden';
     html.style.filter = 'none';
   });
+
+  
 };
 
 function projectSelectionFiller(){

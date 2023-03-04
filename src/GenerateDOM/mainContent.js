@@ -5,7 +5,7 @@ import progressIconUnfinished from '../svg/progressIconUnfinished.png';
 
 import { myProjects } from "../appLogic/initialSetup";
 
-import { makeTodoFormVisible, activateTodoFormEventListeners } from './createNewTodoForm';
+import { makeTodoFormVisible } from './createNewTodoForm';
 
 export {generateMainContent};
 
@@ -33,8 +33,6 @@ function generateMainContent(project){
     generatePageHeading(mainContent, project.getTitle());
 
     generateCreateNewItemButton(mainContent);
-
-    activateTodoFormEventListeners();
 
     generateTodoPanel(mainContent, project.getTodoList());
 
