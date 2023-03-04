@@ -11,15 +11,22 @@
     <div class="container"></div>
     
     <form class="newProjectForm" action="" style="visibility: hidden;">
-        <h3>Create New Project</h3>
+        <div class="formHeader">
+            <h3>Create New Project</h3>
+            <button type="button" class="cancelButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+                    <line x1="20" y1="20" x2="40" y2="40" stroke="#FFFFFF" stroke-width="6"/>
+                    <line x1="40" y1="20" x2="20" y2="40" stroke="#FFFFFF" stroke-width="6"/>
+                  </svg>                  
+            </button>
+        </div>
     
         <label for="projectTitle">Project Title </label>
-        <input type="text" id="projectTitle" name="title" maxlength="22">
+        <input type="text" id="projectTitle" name="title" maxlength="20">
     
         <button type="button" class="submitButton">Submit</button>
-        <div class="rightButtons">
-            <button type="reset">Reset</button>
-            <button type="button" class="cancelButton">Cancel</button>
-        </div>
+        <button type="reset" class="resetButton">Reset</button>
+    </form>
+        
 </body>
 </html>
