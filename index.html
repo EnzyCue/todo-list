@@ -28,7 +28,7 @@
         <button type="reset" class="resetButton">Reset</button>
     </form>
 
-    <form class="newTodoForm" action="" style="visibility: visible;">
+    <form class="newTodoForm" action="" style="visibility: hidden;">
         <div class="formHeader">
             <h3>Add New Task Entry</h3>
             <button type="button" class="cancelButton">
@@ -42,10 +42,14 @@
         <label for="todoTitle">Task Title </label>
         <input type="text" id="todoTitle" name="title" maxlength="35">
 
-        <label for="dueDate">Due Date:</label>
-        <input type="date" id="dueDate" name="dueDate">
+        <label for="todoDueDate">Due Date</label>
+        <input type="date" id="todoDueDate" name="dueDate">
 
-        <div class="priorityLabel">Priority: </div>
+        <label for="projectSelect">Select a project:</label>
+        <select id="projectSelect"></select>
+          
+
+        <div class="priorityLabel">Priority </div>
 
         <div class="prioritySelection">
             <div class="priorityHigh">
