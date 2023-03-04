@@ -13,6 +13,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    background-color: hsl(201deg 6% 96%);
 }
 
 .container {
@@ -84,7 +86,7 @@ body{
     cursor: pointer;
 }
 .leftPanel .projectPanel .addProjectButton{
-    border: white;
+    border: hsl(201deg 6% 96%);
     border-radius: 10px;
     width: 30px;
     height: 30px;
@@ -297,8 +299,9 @@ body{
 }
 
 .newTodoForm{
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 4fr;
+    top: 8rem;
 }
 
 form {
@@ -363,7 +366,7 @@ label{
     text-align: center;
 }
 
-input, select {
+input, select, textarea {
     background-color: #FFFFFF;
     border: 2px solid #D6D9DC;
     border-radius: 3px;
@@ -386,15 +389,15 @@ input:invalid {
 input[type='text'] {
     max-width: 40rem;
 }
-input[type='number'] {
-    max-width: 6rem;
+input[type='date'] {
+    max-width: 40rem;
 }
-
 input[type='checkbox'] {
     width: 4rem;
     height: 2rem;
     border: 2px solid #22d3ee;
 }
+
 
 form button{
     width: 100px;
@@ -408,7 +411,7 @@ form button{
     cursor: pointer;
     border-image: linear-gradient(to bottom, #33f59f, #6fcdff) 1;
 }
-
+no
 
 
 .resetButton {

@@ -20,6 +20,7 @@ export function activateTodoFormEventListeners() {
     const submitButton = document.querySelector('.newTodoForm .submitButton');
 
     const todoTitleInput = document.querySelector('#todoTitle');
+    const todoDescriptionInput = document.querySelector('#todoDescription');
     const todoDueDateInput = document.querySelector('#todoDueDate');
     const todoPriorityInput = todoForm.elements.priority;
     const projectSelectInput = document.querySelector('#projectSelect');
@@ -36,6 +37,7 @@ export function activateTodoFormEventListeners() {
     
     submitButton.addEventListener('click', () => {
       const todoTitle = todoTitleInput.value;
+      const todoDescription = todoDescriptionInput.value;
       const todoDueDate = todoDueDateInput.value;
       const todoPriority = radioButtonChecker(todoPriorityInput);
     
@@ -44,7 +46,7 @@ export function activateTodoFormEventListeners() {
     
       const newTodo = todo(
         todoTitle,
-        'Filler Description',
+        todoDescription,
         todoDueDate,
         todoPriority,
         false,
