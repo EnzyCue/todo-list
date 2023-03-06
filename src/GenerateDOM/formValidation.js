@@ -43,6 +43,14 @@ export function todoFormValidation(){
     const form = document.querySelector(".newTodoForm");
     const title = document.querySelector("#todoTitle");
     const titleError = document.querySelector("#todoTitle + span.error");
+    const cancelButton = document.querySelector('.newTodoForm .cancelButton');
+
+    
+    cancelButton.addEventListener('click', () => {
+        titleError.textContent = ""; 
+        titleError.className = "error"; 
+    });
+
 
     title.addEventListener("input", (event) => {
       
