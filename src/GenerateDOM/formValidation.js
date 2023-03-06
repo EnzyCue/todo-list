@@ -4,6 +4,13 @@ export function projectFormValidation(){
     const form = document.querySelector(".newProjectForm");
     const title = document.querySelector("#projectTitle");
     const titleError = document.querySelector("#projectTitle + span.error");
+    const cancelButton = document.querySelector('.newProjectForm .cancelButton');
+
+    
+    cancelButton.addEventListener('click', () => {
+        titleError.textContent = ""; 
+        titleError.className = "error"; 
+    });
 
     title.addEventListener("input", (event) => {
       
