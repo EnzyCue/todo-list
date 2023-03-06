@@ -41,12 +41,10 @@ export function activateTodoFormEventListeners() {
     const todoPriority = radioButtonChecker(todoPriorityInput);
     const currentProjectID = newTodoButton.dataset.projectid;
   
-    console.log(todoTitle, todoDueDate, todoPriority);
-  
     const newTodo = todo(
       todoTitle,
       todoDescription,
-      todoDueDate,
+      convertDate(todoDueDate),
       todoPriority,
       false,
       globalTodoCounter
@@ -54,13 +52,9 @@ export function activateTodoFormEventListeners() {
     incrementTodoCounter();
   
     const selectedProjectId = projectSelectInput.value;
-    console.log(selectedProjectId, currentProjectID);
-  
-    const selectedProject = myProjects.getProjectById(parseInt(selectedProjectId));
-    selectedProject.getTodoList().addTodo(newTodo);
-    defaultProject.getTodoList().addTodo(newTodo);
-   
+    updateProjects(newTodo, selectedProjectId)
 
+    // display the todo either if the user is on the project page or on the default project page
     if ((selectedProjectId == currentProjectID) || (currentProjectID == 0)){
       displayNewTodo(newTodo);
     };
@@ -68,8 +62,20 @@ export function activateTodoFormEventListeners() {
     todoForm.reset();
     todoForm.style.visibility = 'hidden';
     html.style.filter = 'none';
-
   });
+
+  function convertDate(date_str){
+    let newDateStr = date_str.replace(/-/g, '/');
+    let dateComponents = newDateStr.split('/');
+    let finalDateStr = dateComponents[2] + '/' + dateComponents[1] + '/' + dateComponents[0];
+    return finalDateStr;
+  };
+
+  function updateProjects(todo, projectID){
+    const selectedProject = myProjects.getProjectById(parseInt(projectID));
+    selectedProject.getTodoList().addTodo(todo);
+    defaultProject.getTodoList().addTodo(todo);
+  }
   
   // loads today's date into date form control
   document.querySelector('input[type="date"]').value = new Date().toISOString().split('T')[0];
