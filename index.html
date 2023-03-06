@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do</title>
+    <title>Tasky</title>
     <script src="main.js" defer></script>
 </head>
 <body>
@@ -22,13 +22,19 @@
         </div>
     
         <label for="projectTitle">Project Title </label>
-        <input type="text" id="projectTitle" name="title" maxlength="55" value="My Project">
+        <div class="inputContainer">
+            <input type="text" id="projectTitle" name="title" value="My Project" minlength="3" maxlength="55" required>
+            <span class="error" aria-live="polite"></span>
+        </div>
     
         <button type="button" class="submitButton">Submit</button>
         <button type="reset" class="resetButton">Reset</button>
     </form>
 
-    <form class="newTodoForm" action="" style="visibility: hidden;">
+
+
+
+    <form class="newTodoForm" action="" style="visibility: visible;">
         <div class="formHeader">
             <h3>Add New Task Entry</h3>
             <button type="button" class="cancelButton">
@@ -40,7 +46,11 @@
         </div>
 
         <label for="todoTitle">Task Title </label>
-        <input type="text" id="todoTitle" name="title" maxlength="35" value="My Task">
+
+        <div class="inputContainer">
+            <input type="text" id="todoTitle" name="title" maxlength="35" value="My Task">
+            <span class="error" aria-live="polite"></span>
+        </div>
 
         <label for="todoDescription">Description </label>
         <textarea name="description" id="todoDescription" cols="30" rows="10" maxlength="500"></textarea>
