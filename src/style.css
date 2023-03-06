@@ -299,9 +299,10 @@ body{
 }
 
 .newTodoForm{
-    grid-template-rows: 1fr 1fr 4fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr 1fr 1fr 2fr 1fr;
     grid-template-columns: 1fr 4fr;
-    top: 8rem;
+    top: 1rem;
+    row-gap: 1.5rem;
 }
 
 form {
@@ -378,9 +379,11 @@ input, select, textarea {
     box-shadow: none;
     justify-self: start;
     border-image: linear-gradient(to bottom, #33f59f, #6fcdff) 1;
+    /* border: 3px solid #6fcdff; */
+
 }
 input:focus {
-    border: 0.1rem solid #4997eb;
+    /* border: 0.1rem solid #4997eb; */
     box-shadow: 0 9px 10px -10px #888;
 }
 input:invalid {
@@ -397,22 +400,19 @@ input[type='checkbox'] {
     height: 2rem;
     border: 2px solid #22d3ee;
 }
-input[name='title']{
-    
-}
-
 
 form button{
     width: 100px;
     height: 60px;
-    border-radius: 20px;
+    border-radius: 10px;
     background: #0f172a;
     color: white;
     border: 5px solid transparent;
     font-size: 20px;
     font-weight: 900;
     cursor: pointer;
-    border-image: linear-gradient(to bottom, #33f59f, #6fcdff) 1;
+    /* border-image: linear-gradient(to bottom, #33f59f, #6fcdff) 1; */
+    border: 3px solid #33f59f;
 }
 
 
