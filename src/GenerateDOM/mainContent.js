@@ -5,7 +5,7 @@ import progressIconUnfinished from '../svg/progressIconUnfinished.png';
 
 import { myProjects } from "../appLogic/initialSetup";
 
-import { makeTodoFormVisible } from './createNewTodoForm';
+import { makeTodoFormVisible, projectSelectionFiller } from './createNewTodoForm';
 
 export {generateMainContent};
 
@@ -34,7 +34,7 @@ function generateMainContent(project){
 
     generatePageHeading(mainContent, project.getTitle());
 
-    generateCreateNewItemButton(mainContent);
+    generateCreateNewItemButton(mainContent, project);
 
     generateTodoPanel(mainContent, project.getTodoList());
 
@@ -54,20 +54,26 @@ function generatePageHeading(container, title){
 
 
 
-function generateCreateNewItemButton(container){
+function generateCreateNewItemButton(container, project){
     const newItemButton = document.createElement('button'); 
 
     newItemButton.classList.add('newTodoButton');
 
     newItemButton.textContent = 'Add new item';
+
+    const projectID = project.getId();
+    
+    newItemButton.dataset.projectid = projectID;
+
     container.appendChild(newItemButton);
 
-    activateCreateNewItemButtonListener(newItemButton);
+    activateCreateNewItemButtonListener(newItemButton, project) ;
 };
 
-function activateCreateNewItemButtonListener(newItemButton){
+function activateCreateNewItemButtonListener(newItemButton, project){
     newItemButton.addEventListener('click', () => {
         makeTodoFormVisible();
+        projectSelectionFiller(project);
     });
 };
 
