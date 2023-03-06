@@ -3,6 +3,7 @@ import { globalTodoCounter, incrementTodoCounter } from "../appLogic/initialSetu
 import { myProjects } from "../appLogic/initialSetup";
 import { displayNewTodo } from "./mainContent";
 import { defaultProject } from '../index'
+import { todoFormValidation } from "./formValidation";
 
 const todoForm = document.querySelector('.newTodoForm');
 const html = document.querySelector('.container');
@@ -72,6 +73,8 @@ export function activateTodoFormEventListeners() {
     document.querySelector('input[type="date"]').value = new Date().toISOString().split('T')[0];
     //  loads current projects into selection form control
     projectSelectionFiller();
+
+    todoFormValidation();
 
 };
 

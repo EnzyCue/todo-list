@@ -2,6 +2,7 @@ import { project } from "../appLogic/projectObject";
 import { globalProjectCounter, incrementProjectCounter } from "../appLogic/initialSetup";
 import { myProjects } from "../appLogic/initialSetup";
 import {addProjectToSidebar} from './sidebar'
+import { projectFormValidation } from "./formValidation";
 
 const projectForm = document.querySelector('.newProjectForm');
 
@@ -46,6 +47,6 @@ export function activateProjectFormEventListeners(){
         addProjectToSidebar(newProject);
     
     });
+
+    projectFormValidation();
 };
-
-
